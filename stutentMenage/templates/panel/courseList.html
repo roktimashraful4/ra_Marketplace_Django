@@ -1,0 +1,130 @@
+
+{% extends "panel/basepanel.html" %}
+{% block title %} Project Course Detiles  {% endblock title %}
+{% load static %}
+{% block body %}	
+
+{% for message in messages %}
+            <p class="p-4 alert alert-{{ message.tags }} card-title">{{ message }}</p>
+            {% endfor %}
+                        <div class="row">
+							<div class="col-md-12">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Courses List</h3>
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table class="data-table-example table table-striped table-bordered table-vcenter text-nowrap">
+												<thead>
+													<tr>
+														
+														<th>course Name</th>
+													
+														<th>Course Type</th>
+														<th>Amount</th>
+														<th>creadit</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody>
+													{% for course in courses %}
+													<tr>
+														<td> {{course.curseName}}  </td>
+														
+														<td>Offline</td>
+														<td>৳ {{course.courseFees}}</td>
+														<td class="text-nowrap">{{course.courseCradit}}</td>
+														
+														<td>
+															<a class="btn btn-outline-light btn-sm waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" data-bs-target="#exampleModa{{course.id}}" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>
+															<a class="btn btn-outline-light btn-sm waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" href="#modaldemo{{course.id}}"  data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>
+															
+														</td>
+														<div class="modal fade" id="exampleModa{{course.id}}" tabdocumentation="-1" role="dialog"  aria-hidden="true">
+															<div class="modal-dialog" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="example-Modal3">Edit Course</h5>
+																		<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+																		<form action="hendel_course_update" method="post">
+																			<input type='hidden' name="e_c_id" value='{{course.id}}' /> 
+																			{% csrf_token %}
+																			<div class="form-group">
+																				<label for="coursename"  class="form-control-label">Course Name </label>
+																				<input type="text" class="form-control" id="coursename" name='e_coursename' value='{{course.curseName}}' required >
+																			</div>
+																			<div class="form-group">
+																				<label for="coursename"  class="form-control-label">Course Cradit </label>
+																				<input type="number" min="1" class="form-control" id="coursename" name='e_coursecreadit' value='{{course.courseCradit}}' required >
+																			</div>
+																			<div class="form-group">
+																				<label for="courseFees"  class="form-control-label"> Fess </label>
+																				<input type="number" class="form-control" id="courseFees" name='e_courseFees' value='{{course.courseFees}}' required >
+																			</div>
+																			<div class="form-group">
+																				<label for="courseFees"  class="form-control-label">Reguler Fess </label>
+																				<input type="number" class="form-control" id="courseFees" name='e_Reguler' value='{{course.regularFees}}' required >
+																			</div>
+																			<div class="form-group">
+																				<label for="courseFees"  class="form-control-label">Description </label>
+																				<textarea name="e_dy" class="form-control" cols="30" rows="3">{{course.dy}}</textarea>
+																				</div>
+																			
+																		
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																		<button type="submit" class="btn btn-primary"> Save Update </button>
+																	</div>
+																</form>
+																</div>
+															</div>
+														</div>
+														<div class="modal fade" id="modaldemo{{course.id}}">
+															<div class="modal-dialog modal-dialog-centered text-center" role="document">
+																<div class="modal-content modal-content-demo">
+																	<div class="modal-header">
+																		<h6 class="modal-title">Warning </h6>
+																		<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">×</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+																		<h2> Are you sure ??</h2>
+																		<p>You went to delete data from your datebase. </p>
+																	</div>
+																	<div class="modal-footer">
+																		<form action="hendel_c_delete" method="post">
+																			{% csrf_token %}
+																			<input type="hidden" name="e_c_idi" value="{{course.id}}">
+																			<button class="btn btn-primary" type="submit">DELETE</button> 
+																		</form>
+																		<button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													</tr>
+													{% endfor %}
+												
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+						
+					</div>
+					
+{% endblock body %}
+

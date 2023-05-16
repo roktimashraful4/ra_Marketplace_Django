@@ -1,0 +1,338 @@
+{% extends "panel/basepanel.html" %} 
+
+{% block title %} Project student Profile{% endblock title %} 
+{% block headingtitle %} profile {% endblock headingtitle %} 
+{% block headingtitletag %} profile {% endblock headingtitletag %} 
+{% load static %} 
+{% block body %}
+
+<p id="cirtificateid" class="d-none"> {{catificatekey}}  </p>
+<div class="row">
+  <div class="col-xl-3 col-lg-4 col-md-12">
+    <div class="card user-pro-list overflow-hidden">
+      <div class="card-body">
+        <div class="user-pic text-center">
+          <span
+            class="avatar avatar-xxl brround"
+            style="background-image: url('../../studentProfile/{{studentdata.img}}')"
+          >
+            <span class="avatar-status bg-green"></span>
+          </span>
+          <div class="pro-user mt-3">
+            <h5 class="pro-user-username text-dark mb-1 fs-16">
+              {{studentdata.FastName}} {{studentdata.lestName}}
+            </h5>
+            <h6 class="pro-user-desc text-muted fs-12">
+              {{studentdata.email}}
+            </h6>
+
+            <div class="btn-list">
+              <a href="/editeprofile/{{studentdata.id}}" class="btn btn-primary mt-3"
+                >Edit Profile</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Personal Details</h4>
+        <div class="table-responsive user-details">
+          <table class="table mb-0">
+            <tbody>
+              <tr>
+                <td class="py-2 px-0">
+                  <span class="font-weight-semibold">Name </span>
+                </td>
+                <td class="py-2 px-0" id="name">
+                  {{studentdata.FastName}} {{studentdata.lestName}}
+                </td>
+              </tr>
+             
+              <tr>
+                <td class="py-2 px-0">
+                  <span class="font-weight-semibold w-80">Father Name: </span>
+                </td>
+                <td class="py-2 px-0">{{studentdata.FatherName}}</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-0">
+                  <span class="font-weight-semibold">Course: </span>
+                </td>
+                <td class="py-2 px-0" id="courseName">{{studentdata.courseId.curseName}}</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-0">
+                  <span class="font-weight-semibold">Fess </span>
+                </td>
+                <td class="py-2 px-0">
+                  {{studentdata.courseId.courseFees}} /=
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-0">
+                  <span class="font-weight-semibold">Email </span>
+                </td>
+                <td class="py-2 px-0">{{studentdata.email}}</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-0">
+                  <span class="font-weight-semibold">Phone </span>
+                </td>
+                <td class="py-2 px-0">{{studentdata.Phonenumber}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7 col-xl-9">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Make payment</h3>
+      </div>
+      <div class="card-body">
+        <div id="profile-log-switch">
+          <div class="fade show active">
+            {% if payment.fastpay == '0' or payment == 'nodata' %}
+            {% if due != 0 %}
+            <form class="profile-edit" method="post" action="/firstpayment">
+              {% csrf_token %}
+              <input type="hidden" name="sid" value="{{studentdata.id}}" />
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-6">
+                    <input
+                      type="number"
+                      min="500"
+                      max="{{due}}"
+                      class="form-control"
+                      name="firstpayment"
+                      id="examplenameInputname3"
+                      placeholder="First payment"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    <button
+                      type="submit"
+                      class="btn btn-primary font-weight-semibold btn-block waves-effect waves-light"
+                    >
+                      Payment
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            {% endif %}
+            {% else %}
+              <div class="row">
+                <div class="col-lg-3 p-5">
+                    <h6 class="font-weight-semibold "> First Payment:</h6>
+                </div>
+                <div class="col-lg-3 p-5">
+                    <h4 class="font-weight-semibold">{{payment.fastpay}} /= </h4>
+                </div>
+                <div class="col-lg-6  p-5">
+                    <p class="font-weight-semibold"> {{payment.fastpaydate}}</p>
+                </div>
+              </div>
+            
+            {% endif %}
+            
+            {% if payment.sectpay == '0' or payment == 'nodata' and due != 0 %}
+            {% if due != 0 %}
+            <form class="profile-edit" method="post" action="/secoundpayment">
+              {% csrf_token %}
+              <input type="hidden" name="sid" value="{{studentdata.id}}" />
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="500"
+                      max="{{due}}"
+                      name="secoundpayment"
+                      id="examplenameInputname3"
+                      placeholder="Secound payment"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    <button
+                      type="submit"
+                      class="btn btn-primary font-weight-semibold btn-block waves-effect waves-light"
+                    >
+                      Payment
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            {% endif %}
+
+            {% else %}
+            <div class="row">
+              <div class="col-lg-3 p-5">
+                  <h6 class="font-weight-semibold "> Secound Payment:</h6>
+              </div>
+              <div class="col-lg-3 p-5">
+                  <h4 class="font-weight-semibold">{{payment.sectpay}} /= </h4>
+              </div>
+              <div class="col-lg-6  p-5">
+                  <p class="font-weight-semibold"> {{payment.secoundpaydate}}</p>
+              </div>
+            </div>
+          
+          {% endif %}
+          {% if payment.thirdtpay == '0' or payment == 'nodata' and due != 0 %}
+            {% if due != 0 %}
+            <form class="profile-edit" method="post" action="/thirdpayment">
+              {% csrf_token %}
+              <input type="hidden" name="sid" value="{{studentdata.id}}" />
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-6">
+                    <input
+                      type="number"
+                      min="{{due}}"
+                      max="{{due}}"
+                      class="form-control"
+                      name="thirdpayment"
+                      placeholder="Third  payment"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    <button
+                      type="submit"
+                      class="btn btn-primary font-weight-semibold btn-block waves-effect waves-light"
+                    >
+                      Payment
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            {% endif %}
+
+            {% else %}
+            <div class="row">
+              <div class="col-lg-3 p-5">
+                  <h6 class="font-weight-semibold "> Third Payment:</h6>
+              </div>
+              <div class="col-lg-3 p-5">
+                  <h4 class="font-weight-semibold">{{payment.thirdtpay}} /= </h4>
+              </div>
+              <div class="col-lg-6  p-5">
+                  <p class="font-weight-semibold"> {{payment.thirdpaydate}}</p>
+              </div>
+            </div>
+          
+          {% endif %}
+
+
+          </div>
+          {% if due == 0 %}
+          <h4 class="font-weight-semibold text-center text-success border p-4">
+            PAID !!
+          </h4>
+          {% else %}
+          <h4 class="font-weight-semibold text-end p-4">
+            Due Payment: {{due}} /=
+          </h4>
+          <p class="p font-weight-bold text-end text-danger">* you can download your cirtificate after paid full amount </p>
+          
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Make result</h3>
+      </div>
+      <div class="card-body">
+        <div id="profile-log-switch">
+          <div class="fade show active">
+          
+            <form class="profile-edit" method="post" action="/firstpayment">
+              {% csrf_token %}
+              <input type="hidden" name="sid" value="{{studentdata.id}}" />
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-3 text-center">
+                    <label class="font-weight-semibold " for="atendence" >Atendence  (%) </label>
+                  </div>
+                  <div class="col-md-3 text-center">
+                    <label class="font-weight-semibold " for="#" >Pratical  (%) </label>
+                  </div>
+                  <div class="col-md-3 text-center">
+                    <label class="font-weight-semibold " for="#" >Vaiva (%) </label>
+                  </div>
+                  <div class="col-md-3"></div>
+                  <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="00%" name="atendence" id="atendence required">
+                  </div>
+                  <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="00%" name="atendence" id="atendence required">
+                  </div>
+                  <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="00%" name="atendence" id="atendence required">
+                  </div>
+                  <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary btn-block">Make result </button>
+                  </div>
+                  
+                </div>
+              </div>
+            </form>
+      
+             
+         
+          </div>
+        
+        </div>
+      </div>
+    </div>
+     {% if due == 0 %}
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Get cartificate</h3>
+      </div>
+      <div class="card-body">
+        <div id="profile-log-switch">
+          <div class="fade show active">
+          
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-6">
+                   <input type="text" id="result" class="form-control" placeholder="Enter result example: A+ " required>
+                  </div>
+                  
+                  <div class="col-md-6">
+                  <button type="button" id="getCirtificate" class="btn btn-primary btn-block"> Download cartificate </button>
+                  </div>
+                  
+                </div>
+              </div>
+   
+      
+             
+         
+          </div>
+        
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  
+  </div>
+</div>
+<script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+<script src="{% static 'admin\assets\cartificate/FileSaver.js' %}"></script>
+<script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
+<script src="{% static 'admin\assets\cartificate/index.js' %}"></script>
+{% endblock body %}

@@ -1,0 +1,203 @@
+{% extends "profile.html" %}
+{% load static %}
+{% block profilerightcontent %}
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"> Main Blance </h3>
+            </div>
+            <div class="card-body">
+                <h2 class="h2 title font-weight-semibold p-2"> ৳ {{blance}} /=</h2>
+                <p> <a href="" class="text-red"> *trams and conditions </a></p>
+            </div>
+        </div>
+
+        <div class="card  ">
+            <div class="card-header">
+                <h3 class="card-title">Payment Request  </h3>
+            </div>
+            <div class="card-body ">
+                <div class=" card p-2 bg-warning text-white">
+                    <div class="card-header">
+                        <h3 class="card-title text-white"><i class='fa fa-exclamation-circle '></i> Noted </h3>
+                        
+                    </div>
+                    <div class="card-body">
+                        <p>  Apply conitions : you can widdrw request after you eran 5999. 14.5% charge apply for every widdrow </p>
+                    </div>
+                </div>
+                <form action="/requestpayments" method="post">
+                    {% csrf_token %} 
+                    <input type="hidden" name="id" value="{{request.user.id}}">
+                    <div class="form-group">
+                        <label for="" class="font-weight-semibold"> Amount </label>
+                        <div class="input-group">
+                            <input type="number" name="amount" class="form-control" min='6000' max='{{blance}}' placeholder="enter amount..." required>
+                            <span class="input-group-text">
+                                <button class="btn btn-success" type="submit">sent request</button>
+                            </span>
+                        </div>
+                    </div>
+                    
+                </form>
+        
+                
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-6 col-lg-6 col-6">
+        <div class="card  ">
+            <div class="card-header">
+                <h3 class="card-title">Payment Method  </h3>
+            </div>
+            <div class="card-body">
+                {% if not paymentinfo == 'no-data'  %}
+                <div class='card card-body mb-4 p-5'>
+                    <h3> Agent : {{paymentinfo.bankname|upper}} </h3>
+                    <h3> Number : {{paymentinfo.number|upper}} </h3>
+                </div>
+                {% endif %}
+                <div class="tab-content  mb-0 b-0">
+                    <div class="panel panel-primary">
+                        <div class=" tab-menu-heading border-0 ps-0 pe-0 pt-0">
+                            <div class="tabs-menu1 ">
+                                <!-- Tabs -->
+                                <ul class="nav panel-tabs">
+                                    <li class="ms-0 "><a href="#tab1" class="active" data-bs-toggle="tab">Mobile Banking</a></li>
+                                    <li class="ms-0 "><a href="#tab2" data-bs-toggle="tab">Net Banking</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body tabs-menu-body ps-0 pe-0 border-0">
+                           
+
+                            <div class="tab-content">
+                                
+
+                                <div class="tab-pane active " id="tab1">
+                                    <form action="/paymentinfo" method="post">
+                                        {% csrf_token %} 
+                                        <input type="hidden" name="id" value="{{request.user.id}}">
+                                    <div class="form-group">
+                                        <label class="form-label" >Banking Agent </label>
+                                        <select name="agent" id="" class="form-control" required>
+                                            <option value="">=========== Banking Name ===========</option>
+                                            <option value="bkash"> Bkash</option>
+                                            <option value="nagod">Nagod</option>
+                                            <option value="roket">Roket</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Account number</label>
+                                        <div class="input-group">
+                                            <input type="text" name="number" class="form-control" placeholder="Acount Number..." required>
+                                            <span class="input-group-text">
+                                                <button class="btn btn-success" type="submit">
+                                                    {% if  not paymentinfo == 'no-data'  %}
+                                                       update 
+                                                    {% else %}
+                                                    Save
+                                                    {% endif %}
+                                                    </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                                    
+                                </div>
+                                
+                                <div class="tab-pane " id="tab2">
+                                    <p class='alert alert-warning ' style="display:flex; place-items:center"> <i class="fa fa-exclamation-circle fa-2x me-5"></i> <b> Bank transfer system is stoped now. </b> <i>Thanks you </i> </p>
+                                    <div class="control-group form-group">
+                                        <div class="form-group">
+                                            <label class="form-label text-dark">All Banks</label>
+                                            <select class="form-control select2 form-select required category">
+                                                <option value="0">Select Bank</option>
+                                                <option value="1">Credit Agricole Group</option>
+                                                <option value="2">Bank of America</option>
+                                                <option value="3">Mitsubishi UFJ Financial Group</option>
+                                                <option value="4">BNP Paribas</option>
+                                                <option value="5">JPMorgan Chase & Co.</option>
+                                                <option value="6">HSBC Holdings</option>
+                                                <option value="7">Bank of China</option>
+                                                <option value="8">Agricultural Bank of China</option>
+                                                <option value="9">China Construction Bank Corp.</option>
+                                                <option value="10">Industrial & Commercial Bank of China, or ICBC</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <p><a href="javascript:void(0)" class="btn btn-primary">Log in Bank</a></p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+        
+              
+                
+                   
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card mb-0">
+    <div class="card-header">
+        <h3 class="card-title">Payment statment Historys </h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive payment-invoice">
+            <table class="data-table-example table table-bordered table-hover text-nowrap">
+                <thead>
+                    <tr>
+                        <th>Invoice ID</th>
+                        <th>Timings</th>
+                        <th>Amount </th>
+                        <th>status </th>
+                        
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in rs %}
+                    <tr>
+                        <td>#INV-{{r.requid}}</td>
+                      
+                        <td>{{r.curenttime}}</td>
+                        <td class="font-weight-semibold fs-16">৳ {{r.amount}}</td>
+                        <td class="font-weight-semibold fs-16"><a href="javascript:void(0)" class="btn 
+                             {% if r.status == 'requested' %}
+                                  btn-warning
+                             {% elif r.status == 'accepted' %}
+                                    btn-success
+
+                                {% else %}
+                                btn-danger
+                             {% endif %}
+                           
+                            
+                            btn-sm">
+                            
+                            {{r.status}}</a></td>
+                       
+                        <td class="text-center">
+                          <a class="btn btn-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="View"><i class="fe fe-eye fs-16"></i></a>
+                        </td>
+                    </tr>
+                     {% endfor %} 
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock profilerightcontent %}

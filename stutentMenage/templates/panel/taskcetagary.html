@@ -1,0 +1,171 @@
+
+{% extends "panel/basepanel.html" %}
+{% block title %} Project Task cetagery List  {% endblock title %}
+{% block style %}
+
+  <style>
+    .modal-body p{
+        text-align:left;
+    }
+    .modal-body p  label{
+        font-weight: bold;
+    }
+    .errorlist{
+        display:none;
+    }
+  </style>
+  {% endblock style %}
+{% load static %}
+{% block body %}	
+
+{% for message in messages %}
+            <p class="p-4 alert alert-{{ message.tags }} card-title">{{ message }}</p>
+            {% endfor %}
+            <div class="row">
+                
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header" style="display: flex; justify-content: space-between;">
+                            <h3 class="card-title">Task cetagary List</h3>
+                            <a class="btn btn-outline-primary btn-md waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" href="#newtaskcetagery"  data-bs-toggle="tooltip" data-bs-original-title="add new">  Add New <i class="fe fe-plus fs-16"></i></a>
+												
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="data-table-example table table-striped table-bordered table-vcenter text-nowrap">
+                                    <thead>
+                                        <tr>
+                                          
+                                            <th> Id</th>
+                                            <th>Image</th>
+                                            <th> Slug</th>
+                                            <th> Name</th>
+                                                                                      
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    {% for s in cetagoryes %}
+                                        <tr>
+                                           
+                                            <td>{{s.id}} </td>
+                                            <td><a href="/studentprofile/{{s.id}}"><img src="studentProfile/{{s.img}}" alt="" class="w-8 h-8 br-7 border p-2"></a>
+                                             
+                                             <form action="changepic" method="post">
+                                                 <input class="btn btn-link" type="submit" value="change Image">
+
+                                             </form>
+                                            </td>
+                                            <td><a href=""> {{s.slug}} </a></td>
+                                            <td><a href=""> {{s.title}} </a></td>
+                                            
+                                            <td>
+                                                <a class="btn btn-outline-light btn-sm waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" data-bs-target="#exampleModa{{s.id}}" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>
+												<a class="btn btn-outline-light btn-sm waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" href="#modaldemo{{s.id}}"  data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>
+															
+                                            </td>
+                                            <div class="modal fade" id="exampleModa{{s.id}}" tabdocumentation="-1" role="dialog"  aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModa{{s.id}}">New message</h5>
+                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="edittaskcetagery" method="post">
+                                                                <input type='hidden' name="e_id" value='{{s.id}}' /> 
+                                                                {% csrf_token %}
+                                                                <div class="form-group">
+                                                                    <label for="fastname"  class="form-control-label"> Name </label>
+                                                                    <input type="text" class="form-control" id="fastname" name='e_title' value='{{s.title}}' required >
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="lestname"  class="form-control-label">Slug </label>
+                                                                    <input type="text"  class="form-control" id="lestname" name='e_slug' value='{{s.slug}}' required >
+                                                                </div>
+                                                               
+                                                                <div class="form-group">
+                                                                    <label   class="form-control-label">Sort Discriptions  </label>
+                                                                   <textarea class="form-control" name="e_shortdis" id="" cols="30" rows="10">{{s.shortdis}}</textarea>
+                                                                </div>
+                                                               
+                                                                
+                                                                
+                                                            
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary"> Save Update </button>
+                                                        </div>
+                                                    </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="modaldemo{{s.id}}">
+                                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                                                    <div class="modal-content modal-content-demo">
+                                                        <div class="modal-header">
+                                                            <h6 class="modal-title">Warning </h6>
+                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h2> Are you sure ??</h2>
+                                                            <p>You went to delete data from your datebase. </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form action="deletetaskcetagerys" method="post">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="e_idi" value="{{s.id}}">
+                                                                <button class="btn btn-primary" type="submit">DELETE</button> 
+                                                            </form>
+                                                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="modal fade" id="newtaskcetagery">
+                <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                    <div class="modal-content modal-content-demo">
+                        <div class="modal-header">
+                            <h6 class="modal-title">Add new task </h6>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                               {{addform.as_p}}
+                        </div>
+                        <div class="modal-footer">
+                            
+                                <button class="btn btn-primary" type="submit">Save </button> 
+                            </form>
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+					
+{% endblock body %}
+

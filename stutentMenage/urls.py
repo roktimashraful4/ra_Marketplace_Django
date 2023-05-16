@@ -1,0 +1,65 @@
+# //////////// Devoloped by Roktim  ashrafull \\\\\\\\
+
+from django import views
+from django.contrib import admin
+from django.urls import path, include
+from .  import views 
+urlpatterns = [
+   path('',views.hello,name='index'),    
+   path('login',views.userlogin,name='login'),        
+   path('logout',views.hendellogout,name='hendellogout'),        
+   path('useradminpanel',views.deshboard,name='deshboard'),    
+   path('addstudent',views.addstudentpage,name='addstudentpage'),    
+   path('addnewcourse',views.addnewcoursepage,name='addnewcoursepage'),    
+   path('courselist',views.courselistpage,name='courselistpage'),    
+   path('hendel_course_update',views.hendel_course_update,name='hendel_course_update'),    
+   path('hendel_c_delete',views.hendel_course_delete,name='hendel_course_delete'),    
+   path('hendel_save_student',views.hendel_save_student,name='hendel_save_student'),    
+   path('studentlist',views.studentlistPage,name='studentlistPage'),    
+   path('hendel_student_update',views.hendel_student_update,name='hendel_student_update'),    
+   path('hendel_s_delete',views.hendel_s_delete,name='hendel_s_delete'),    
+   path('studentprofile/<sid>/',views.studentprofilepage,name='studentprofilepage'),    
+   path('firstpayment',views.firstpayment,name='firstpayment'),    
+   path('secoundpayment',views.secoundpayment,name='secoundpayment'),    
+   path('thirdpayment',views.thirdpayment,name='thirdpayment'),    
+   path('editeprofile/<sid>/',views.editeprofile,name='editeprofile'),    
+   path('about',views.about,name='about'),    
+   path('contact',views.contact,name='contact'),    
+   path('course',views.coursepage,name='course'),    
+   path('getcirtificate',views.getcirtificate,name='getcirtificate'),    
+   path('billinglist',views.billinglist,name='billinglist'),    
+   path('findcartificate',views.findcartificate,name='findcartificate'),   
+
+   path('signup',views.signup,name='signup'), 
+   path('profile',views.profile,name='profile'), 
+   path('profile/<usid>',views.profileuser,name='profileuser'), 
+   path('updateprofile',views.updateprofile,name='updateprofile'), 
+   path('savemyskill',views.savemyskill,name='savemyskill'), 
+   path('updateskill',views.skillupdate,name='skillupdate'), 
+   path('deleteskill',views.deleteskill,name='deleteskill'), 
+   path('taskcetagery',views.taskcetagery,name='taskcetagery'), 
+   path('edittaskcetagery',views.edittaskcetagery,name='edittaskcetagery'), 
+   path('deletetaskcetagerys',views.deletetaskcetagerys,name='deletetaskcetagerys'), 
+   path('newtask',views.addnewtask,name='addnewtask'), 
+   path('tasklist',views.tasklist,name='tasklist'), 
+   path('categories',views.categories,name='categories'), 
+   path('categories/<slug>',views.categoriproject,name='categoriproject'), 
+   path('project',views.project,name='project'), 
+   path('project/<slug>',views.getproject,name='getproject'), 
+   path('addtobittask',views.addtobittask,name='addtobittask'), 
+   path('<usid>/mybitedtask',views.mybitedtask,name='mybitedtask'), 
+   path('cancelbit',views.cancelbit,name='cancelbit'), 
+   path('bitsubmit',views.bitsubmit,name='bitsubmit'), 
+   path('bitlist',views.bitlist,name='bitlist'), 
+   path('bitlist/<bitid>',views.bitdetils,name='bitdetils'), 
+   path('makecompliteproject',views.makecompliteproject,name='makecompliteproject'), 
+   path('cancelproject',views.cancelproject,name='cancelproject'), 
+   path('reviewprojects',views.reviewprojects,name='reviewprojects'), 
+   path('<usid>/payment',views.mypayments,name='mypayments'), 
+   path('paymentinfo',views.paymentinfo,name='paymentinfo'), 
+   path('requestpayments',views.requestpayments,name='requestpayments'), 
+   path('bitpaymentrequest',views.bitpaymentrequest,name='bitpaymentrequest'), 
+
+
+]
+# //////////// Devoloped by Roktim  ashrafull \\\\\\\\

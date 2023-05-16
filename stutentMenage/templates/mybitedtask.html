@@ -1,0 +1,828 @@
+{% extends "profile.html" %}
+{% load static %}
+{% block profilerightcontent %}
+
+<div class="card mb-0">
+    <div class="card-header">
+        <h3 class="card-title">My Courses</h3>
+    </div>
+    <div class="card-body">
+        <div class="ads-tabs">
+            <div class="tabs-menus">
+                <!-- Tabs -->
+                <ul class="nav panel-tabs">
+                    <li class="mb-5 "><a href="#tab1" class="active" data-bs-toggle="tab">All Task  <span class="ms-3 badge badge-primary">{{bittasks|length}}</span></a></li>
+                    <li class="mb-5 "><a href="#tab7"  data-bs-toggle="tab">Working  <span class="ms-3 badge badge-primary">{{workingtedBit|length}}</span></a></li>
+                    <li class="mb-5 "><a href="#tab8"  data-bs-toggle="tab">Processing  <span class="ms-3 badge badge-primary">{{processingbit|length}}</span></a></li>
+                    <li class="mb-5 "><a href="#tab9"  data-bs-toggle="tab"> In Review  <span class="ms-3 badge badge-primary">{{inreviewbit|length}}</span></a></li>
+                    <li class="mb-5 "><a href="#tab2" data-bs-toggle="tab">Canceled <span class="ms-3 badge badge-primary">{{cancelBit|length}}</span></a></li>
+                    <li class="mb-5 "><a href="#tab3" data-bs-toggle="tab">Complited <span class="ms-3 badge badge-primary">{{completedBit|length}}</span></a></li>
+                    <li class="mb-5 "><a href="#tab6" data-bs-toggle="tab">Expired <span class="ms-3 badge badge-primary">{{expired|length}}</span></a></li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane  active table-responsive userprof-tab" id="tab1">
+                    <table class="data-table-example table table-bordered table-hover mb-0 text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Task</th>
+                                <th>Expired In </th>
+                                <th>Fees</th>
+                                <th>Status</th>
+                                <th >Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% load days_counter %}
+                            {% for bit in  bittasks  %}
+                           
+                            <tr>
+                                <td># {{bit.tastId}}</td>
+                                <td>
+                                    <div class="media mt-0 mb-0">
+                                        <div class="card-aside-img">
+                                            <a href="javascript:void(0)"></a>
+                                            <img src="../studentProfile/{{bit.task.image}}" alt="img">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="card-item-desc ms-2 p-0 mt-0">
+                                                <a href="javascript:void(0)" class="text-dark"><h4 class="font-weight-bold">{{bit.task.title}}</h4></a>
+                                                <a href="javascript:void(0)" class="text-muted fs-12"><i class="fa fa-clock-o me-1"></i> {{bit.task.expdate}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if 0  >= bit.task.expdate|days_until %}
+                                             Expired 
+                                             {% else %}
+                                        {{bit.task.expdate|days_until}}
+                                      {% endif %} 
+                                     Days </td>
+                                <td class="font-weight-semibold fs-16">৳ {{bit.task.budget}}</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn
+                                    {% if bit.status == "cancel" or 0  >= bit.task.expdate|days_until and not bit.status == "completed" %}
+                                        btn-danger
+                                       
+                                    
+                                        {% elif bit.status == "working" or bit.status == "processing" or bit.status == "in-review" %}
+                                        btn-warning
+                                    
+                                    
+                                    {% elif bit.status == "completed" %}
+                                        btn-success
+                                  
+                                    
+                                    {% endif %}
+                                    btn-sm">
+                                    {% if 0  >= bit.task.expdate|days_until and not bit.status == "completed" %}
+                                             Expired 
+                                         {% else %}
+                                    {{bit.status|upper}}
+                                    {% endif %}
+                                </a>
+                                </td>
+                                <td> 
+                                    {% if bit.status == "working" or bit.status == "in-review" %} 
+                                      {% if not 0  >= bit.task.expdate|days_until  %}
+                                      <a class="btn btn-outline-light btn-sm waves-effect waves-light"  data-bs-original-title="Upload" data-bs-toggle="modal" data-bs-target="#uploadbit{{bit.id}}"  ><i class="fa fa-upload fs-16"></i></a>
+                                                    <!-- Message Modal -->
+                                            <div class="modal fade" id="uploadbit{{bit.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                                                <div class="modal-dialog  modal-md" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="examplecontactLongTitle">Submit Project</h5>
+                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body ">
+                                                              <div class="card ">
+                                                                  <div class="card-body">
+                                                                      <div class="d-flex justify-content">
+                                                                        <div class="card-aside-img" style="width: 20%; margin-right: 15px;">
+                                                                            <a href="javascript:void(0)"></a>
+                                                                            <img src="../studentProfile/{{bit.task.image}}" alt="img-thumbnail" class="img-thumbnail">
+                                                                        </div>
+                                                                          <div class="text-body" style="width: 80%;">
+                                                                              <h5 >{{bit.task.title}}</h5>
+                                                                              <h6 class="text">৳ {{bit.task.budget}}</h6>
+                                                                              <p class="text"> exp:  {{bit.task.expdate}}</p>
+                                                                             
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                            <form action="/bitsubmit" method="post" enctype="multipart/form-data">
+                                                                {% csrf_token %}
+                                                                 
+                                                                  <div class="form-group">
+                                                                      <label class="font-weight-semibold" >Messages </label>
+                                                                     <textarea class="form-control" name="messages" id="" cols="20" rows="5" placeholder="write somthing"></textarea>
+                                                                  </div>
+                                                                  <div class="form-group">
+                                                                      <label class="font-weight-semibold" >Upload your file  </label>
+                                                                      <input type="file" class="form-control" name="projectfile" accept=".zip" id="">
+                                                                  </div>
+                                                           
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No </button>
+                                                           
+                                                              
+                                                                <input type="hidden" name="id" value="{{bit.id}}">
+                                                            
+                                                            <button type="submit" class="btn btn-success">Yes</button>
+                                                        </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /Message Modal --> 
+
+                                      {% endif %}
+                                        <a class="btn btn-outline-light btn-sm waves-effect waves-light"  data-bs-original-title="Cancel"  data-bs-toggle="modal" data-bs-target="#cancelbit{{bit.id}}" ><i class="fa fa-times-circle fs-16"></i></a>
+                                        <!-- Message Modal -->
+                                            <div class="modal fade" id="cancelbit{{bit.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                                                <div class="modal-dialog  modal-md" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="examplecontactLongTitle">Cancel Project</h5>
+                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body text-center">
+                                                            <h2 class=''> Are you sure ?? </h2>
+                                                            <p> you went to cancel this Project </p> 
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No </button>
+                                                            <form action="/cancelbit" method="post">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="id" value="{{bit.id}}">
+                                                            
+                                                            <button type="submit" class="btn btn-success">Yes</button>
+                                                        </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /Message Modal --> 
+                                    
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                    
+                                    {% else %}
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                    
+                                    {% endif %}
+                                </td>
+                            </tr>
+                         
+                            {% endfor %}
+                       
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane table-responsive userprof-tab" id="tab2">
+                    <table class="data-table-example table table-bordered table-hover mb-0 text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Task</th>
+                                <th>Expired In </th>
+                                <th>Fees</th>
+                                <th>Status</th>
+                                <th >Action</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% load days_counter %}
+                            {% for bit in  bittasks  %}
+                            {% if 0  <= bit.task.expdate|days_until and  bit.status == "cancel" %}
+                            <tr>
+                                <td># {{bit.tastId}}</td>
+                                <td>
+                                    <div class="media mt-0 mb-0">
+                                        <div class="card-aside-img">
+                                            <a href="javascript:void(0)"></a>
+                                            <img src="../studentProfile/{{bit.task.image}}" alt="img">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="card-item-desc ms-2 p-0 mt-0">
+                                                <a href="javascript:void(0)" class="text-dark"><h4 class="font-weight-bold">{{bit.task.title}}</h4></a>
+                                                <a href="javascript:void(0)" class="text-muted fs-12"><i class="fa fa-clock-o me-1"></i> {{bit.task.expdate}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if 0  >= bit.task.expdate|days_until %}
+                                             Expired 
+                                             {% else %}
+                                        {{bit.task.expdate|days_until}}
+                                      {% endif %} 
+                                     Days </td>
+                                <td class="font-weight-semibold fs-16">৳ {{bit.task.budget}}</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn
+                                    {% if bit.status == "working"  %}
+                                           btn-warning
+                                    
+                                {% elif bit.status == "cancel" or 0  >= bit.task.expdate|days_until and not bit.status == "completed" %}
+                                    btn-danger
+                                {% elif bit.status == "completed" %}
+                                    btn-success
+                                
+                                {% endif %}
+                                    btn-sm">
+                                    {% if 0  >= bit.task.expdate|days_until and not bit.status == "completed"  %}
+                                             Expired 
+                                         {% else %}
+                                    {{bit.status|upper}}
+                                    {% endif %}
+                                </a>
+                                </td>
+                                <td> 
+                                    {% if bit.status == "working" %} 
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Cancel"><i class="fa fa-times-circle fs-16"></i></a>
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Upload"><i class="fa fa-upload fs-16"></i></a>
+                                    {% else %}
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                         
+                            {% endfor %}
+                       
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane  table-responsive userprof-tab" id="tab3">
+                    <table class="data-table-example table table-bordered table-hover  text-nowrap mb-0">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Task</th>
+                                <th>Expired In </th>
+                                <th>Fees</th>
+                                <th>Status</th>
+                                <th >Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% load days_counter %}
+                            {% for bit in  bittasks  %}
+                            {% if bit.status == "completed" %}
+                            <tr>
+                                <td># {{bit.tastId}}</td>
+                                <td>
+                                    <div class="media mt-0 mb-0">
+                                        <div class="card-aside-img">
+                                            <a href="javascript:void(0)"></a>
+                                            <img src="../studentProfile/{{bit.task.image}}" alt="img">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="card-item-desc ms-2 p-0 mt-0">
+                                                <a href="javascript:void(0)" class="text-dark"><h4 class="font-weight-bold">{{bit.task.title}}</h4></a>
+                                                <a href="javascript:void(0)" class="text-muted fs-12"><i class="fa fa-clock-o me-1"></i> {{bit.task.expdate}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if 0  >= bit.task.expdate|days_until %}
+                                             Expired 
+                                             {% else %}
+                                        {{bit.task.expdate|days_until}}
+                                      {% endif %} 
+                                     Days </td>
+                                <td class="font-weight-semibold fs-16">৳ {{bit.task.budget}}</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn
+                                    {% if bit.status == "working" %}
+                                    btn-warning
+                                {% elif bit.status == "cancel" or 0  >= bit.task.expdate|days_until and not bit.status == "completed" %}
+                                    btn-danger
+                                {% elif bit.status == "completed" %}
+                                    btn-success
+                                
+                                {% endif %}
+                                    btn-sm">
+                                    {% if 0  >= bit.task.expdate|days_until and not bit.status == "completed"  %}
+                                             Expired 
+                                         {% else %}
+                                    {{bit.status|upper}}
+                                    {% endif %}
+                                </a>
+                                </td>
+                                <td> 
+                                    {% if bit.status == "working" %} 
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Cancel"><i class="fa fa-times-circle fs-16"></i></a>
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Upload"><i class="fa fa-upload fs-16"></i></a>
+                                    {% else %}
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                         
+                            {% endfor %}
+                       
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="tab-pane  table-responsive  userprof-tab" id="tab6">
+                    <table class="data-table-example table table-bordered table-hover mb-0 text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Task</th>
+                                <th>Expired In </th>
+                                <th>Fees</th>
+                                <th>Status</th>
+                                <th >Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% load days_counter %}
+                            {% for bit in  bittasks  %}
+                            {% if 0  >= bit.task.expdate|days_until and not  bit.status == "completed" %}
+                            <tr>
+                                <td># {{bit.tastId}}</td>
+                                <td>
+                                    <div class="media mt-0 mb-0">
+                                        <div class="card-aside-img">
+                                            <a href="javascript:void(0)"></a>
+                                            <img src="../studentProfile/{{bit.task.image}}" alt="img">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="card-item-desc ms-2 p-0 mt-0">
+                                                <a href="javascript:void(0)" class="text-dark"><h4 class="font-weight-bold">{{bit.task.title}}</h4></a>
+                                                <a href="javascript:void(0)" class="text-muted fs-12"><i class="fa fa-clock-o me-1"></i> {{bit.task.expdate}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if 0  >= bit.task.expdate|days_until %}
+                                             Expired 
+                                             {% else %}
+                                        {{bit.task.expdate|days_until}}
+                                      {% endif %} 
+                                     Days </td>
+                                <td class="font-weight-semibold fs-16">৳ {{bit.task.budget}}</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn
+                                    
+                                    {% if bit.status == "cancel" or 0  >= bit.task.expdate|days_until and not bit.status == "completed" %}
+                                    btn-danger
+                                    {% elif bit.status == "working" %}
+                                    btn-warning
+                                
+                                {% elif bit.status == "completed" %}
+                                    btn-success
+                                
+                                {% endif %}
+                                    btn-sm">
+                                    {% if 0  >= bit.task.expdate|days_until and not bit.status == "completed"  %}
+                                             Expired 
+                                         {% else %}
+                                    {{bit.status|upper}}
+                                    {% endif %}
+                                </a>
+                                </td>
+                                <td> 
+                                    {% if bit.status == "working" and not 0  >= bit.task.expdate|days_until%} 
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Cancel"><i class="fa fa-times-circle fs-16"></i></a>
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Upload"><i class="fa fa-upload fs-16"></i></a>
+                                    {% else %}
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                         
+                            {% endfor %}
+                       
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane  table-responsive  userprof-tab" id="tab7">
+                    <table class="data-table-example table table-bordered table-hover mb-0 text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Task</th>
+                                <th>Expired In </th>
+                                <th>Fees</th>
+                                <th>Status</th>
+                                <th >Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% load days_counter %}
+                            {% for bit in  bittasks  %}
+                            {% if  0  <= bit.task.expdate|days_until and   bit.status == "working" %}
+                            <tr>
+                                <td># {{bit.tastId}}</td>
+                                <td>
+                                    <div class="media mt-0 mb-0">
+                                        <div class="card-aside-img">
+                                            <a href="javascript:void(0)"></a>
+                                            <img src="../studentProfile/{{bit.task.image}}" alt="img">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="card-item-desc ms-2 p-0 mt-0">
+                                                <a href="javascript:void(0)" class="text-dark"><h4 class="font-weight-bold">{{bit.task.title}}</h4></a>
+                                                <a href="javascript:void(0)" class="text-muted fs-12"><i class="fa fa-clock-o me-1"></i> {{bit.task.expdate}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if 0  >= bit.task.expdate|days_until %}
+                                             Expired 
+                                             {% else %}
+                                        {{bit.task.expdate|days_until}}
+                                      {% endif %} 
+                                     Days </td>
+                                <td class="font-weight-semibold fs-16">৳ {{bit.task.budget}}</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn
+                                    
+                                    {% if bit.status == "cancel" or 0  >= bit.task.expdate|days_until and not bit.status == "completed" %}
+                                    btn-danger
+                                    {% elif bit.status == "working" %}
+                                    btn-warning
+                                
+                                {% elif bit.status == "completed" %}
+                                    btn-success
+                                
+                                {% endif %}
+                                    btn-sm">
+                                    {% if 0  >= bit.task.expdate|days_until and not bit.status == "completed"  %}
+                                             Expired 
+                                         {% else %}
+                                    {{bit.status|upper}}
+                                    {% endif %}
+                                </a>
+                                </td>
+                                <td> 
+                                    {% if bit.status == "working" or bit.status == "in-review" %} 
+                                    {% if not 0  >= bit.task.expdate|days_until  %}
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light"  data-bs-original-title="Upload" data-bs-toggle="modal" data-bs-target="#uploadbitw{{bit.id}}"  ><i class="fa fa-upload fs-16"></i></a>
+                                                    <!-- Message Modal -->
+                                            <div class="modal fade" id="uploadbitw{{bit.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                                                <div class="modal-dialog  modal-md" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="examplecontactLongTitle">Submit Project</h5>
+                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body ">
+                                                              <div class="card ">
+                                                                  <div class="card-body">
+                                                                      <div class="d-flex justify-content">
+                                                                        <div class="card-aside-img" style="width: 20%; margin-right: 15px;">
+                                                                            <a href="javascript:void(0)"></a>
+                                                                            <img src="../studentProfile/{{bit.task.image}}" alt="img-thumbnail" class="img-thumbnail">
+                                                                        </div>
+                                                                          <div class="text-body" style="width: 80%;">
+                                                                              <h5 >{{bit.task.title}}</h5>
+                                                                              <h6 class="text">৳ {{bit.task.budget}}</h6>
+                                                                              <p class="text"> exp:  {{bit.task.expdate}}</p>
+                                                                             
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                            <form action="/bitsubmit" method="post" enctype="multipart/form-data">
+                                                                {% csrf_token %}
+                                                                 
+                                                                  <div class="form-group">
+                                                                      <label class="font-weight-semibold" >Messages </label>
+                                                                     <textarea class="form-control" name="messages" id="" cols="20" rows="5" placeholder="write somthing"></textarea>
+                                                                  </div>
+                                                                  <div class="form-group">
+                                                                      <label class="font-weight-semibold" >Upload your file  </label>
+                                                                      <input type="file" class="form-control" name="projectfile" accept=".zip" id="">
+                                                                  </div>
+                                                           
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No </button>
+                                                           
+                                                              
+                                                                <input type="hidden" name="id" value="{{bit.id}}">
+                                                            
+                                                            <button type="submit" class="btn btn-success">Yes</button>
+                                                        </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /Message Modal --> 
+
+                                    {% endif %}
+                                      <a class="btn btn-outline-light btn-sm waves-effect waves-light"  data-bs-original-title="Cancel"  data-bs-toggle="modal" data-bs-target="#cancelbitw{{bit.id}}" ><i class="fa fa-times-circle fs-16"></i></a>
+                                      <!-- Message Modal -->
+                                          <div class="modal fade" id="cancelbitw{{bit.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                                              <div class="modal-dialog  modal-md" role="document">
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h5 class="modal-title" id="examplecontactLongTitle">Cancel Project</h5>
+                                                          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                      </div>
+                                                      <div class="modal-body text-center">
+                                                          <h2 class=''> Are you sure ?? </h2>
+                                                          <p> you went to cancel this Project </p> 
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No </button>
+                                                          <form action="/cancelbit" method="post">
+                                                              {% csrf_token %}
+                                                              <input type="hidden" name="id" value="{{bit.id}}">
+                                                          
+                                                          <button type="submit" class="btn btn-success">Yes</button>
+                                                      </form>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div><!-- /Message Modal --> 
+                                  
+                                  <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                  
+                                  {% else %}
+                                  <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                  
+                                  {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                         
+                            {% endfor %}
+                       
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane  table-responsive  userprof-tab" id="tab8">
+                    <table class="data-table-example table table-bordered table-hover mb-0 text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Task</th>
+                                <th>Expired In </th>
+                                <th>Fees</th>
+                                <th>Status</th>
+                                <th >Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% load days_counter %}
+                            {% for bit in  bittasks  %}
+                            {% if 0  <= bit.task.expdate|days_until and bit.status == "processing" %}
+                            <tr>
+                                <td># {{bit.tastId}}</td>
+                                <td>
+                                    <div class="media mt-0 mb-0">
+                                        <div class="card-aside-img">
+                                            <a href="javascript:void(0)"></a>
+                                            <img src="../studentProfile/{{bit.task.image}}" alt="img">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="card-item-desc ms-2 p-0 mt-0">
+                                                <a href="javascript:void(0)" class="text-dark"><h4 class="font-weight-bold">{{bit.task.title}}</h4></a>
+                                                <a href="javascript:void(0)" class="text-muted fs-12"><i class="fa fa-clock-o me-1"></i> {{bit.task.expdate}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if 0  >= bit.task.expdate|days_until %}
+                                             Expired 
+                                             {% else %}
+                                        {{bit.task.expdate|days_until}}
+                                      {% endif %} 
+                                     Days </td>
+                                <td class="font-weight-semibold fs-16">৳ {{bit.task.budget}}</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn
+                                    
+                                    {% if bit.status == "cancel" or 0  >= bit.task.expdate|days_until and not bit.status == "completed" %}
+                                    btn-danger
+                                    {% elif bit.status == "working" %}
+                                    btn-warning
+                                
+                                {% elif bit.status == "completed" %}
+                                    btn-success
+                                {% elif bit.status == "processing"  %}
+                                    btn-warning
+                                
+                                {% endif %}
+                                    btn-sm">
+                                    {% if 0  >= bit.task.expdate|days_until and not bit.status == "completed"  %}
+                                             Expired 
+                                         {% else %}
+                                    {{bit.status|upper}}
+                                    {% endif %}
+                                </a>
+                                </td>
+                                <td> 
+                                    {% if bit.status == "working"  %} 
+                                      {% if not 0  >= bit.task.expdate|days_until %}
+                                      <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Upload"><i class="fa fa-upload fs-16"></i></a>
+                                      {% endif %}
+                                        <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Cancel"><i class="fa fa-times-circle fs-16"></i></a>
+                                    
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                    {% else %}
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                    
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                         
+                            {% endfor %}
+                       
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane  table-responsive  userprof-tab" id="tab9">
+                    <table class="data-table-example table table-bordered table-hover mb-0 text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Task</th>
+                                <th>Expired In </th>
+                                <th>Fees</th>
+                                <th>Status</th>
+                                <th >Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% load days_counter %}
+                            {% for bit in  bittasks  %}
+                            {% if 0  <= bit.task.expdate|days_until and  bit.status == "in-review" %}
+                            <tr>
+                                <td># {{bit.tastId}}</td>
+                                <td>
+                                    <div class="media mt-0 mb-0">
+                                        <div class="card-aside-img">
+                                            <a href="javascript:void(0)"></a>
+                                            <img src="../studentProfile/{{bit.task.image}}" alt="img">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="card-item-desc ms-2 p-0 mt-0">
+                                                <a href="javascript:void(0)" class="text-dark"><h4 class="font-weight-bold">{{bit.task.title}}</h4></a>
+                                                <a href="javascript:void(0)" class="text-muted fs-12"><i class="fa fa-clock-o me-1"></i> {{bit.task.expdate}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if 0  >= bit.task.expdate|days_until %}
+                                             Expired 
+                                             {% else %}
+                                        {{bit.task.expdate|days_until}}
+                                      {% endif %} 
+                                     Days </td>
+                                <td class="font-weight-semibold fs-16">৳ {{bit.task.budget}}</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn
+                                    
+                                    {% if bit.status == "cancel" or 0  >= bit.task.expdate|days_until and not bit.status == "completed" %}
+                                    btn-danger
+                                    {% elif bit.status == "working"  or bit.status == "processing" or bit.status == "in-review" or  0  >= bit.task.expdate|days_until %}
+                                    btn-warning
+                                
+                                {% elif bit.status == "completed" %}
+                                    btn-success
+                                {% elif bit.status == "processing"  %}
+                                    btn-warning
+                                
+                                {% endif %}
+                                    btn-sm">
+                                    {% if 0  >= bit.task.expdate|days_until and not bit.status == "completed"  %}
+                                             Expired 
+                                         {% else %}
+                                    {{bit.status|upper}}
+                                    {% endif %}
+                                </a>
+                                </td>
+                                <td> 
+                                    {% if bit.status == "working" or bit.status == "in-review" %} 
+                                    {% if not 0  >= bit.task.expdate|days_until  %}
+                                    <a class="btn btn-outline-light btn-sm waves-effect waves-light"  data-bs-original-title="Upload" data-bs-toggle="modal" data-bs-target="#uploadbitin{{bit.id}}"  ><i class="fa fa-upload fs-16"></i></a>
+                                                    <!-- Message Modal -->
+                                            <div class="modal fade" id="uploadbitin{{bit.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                                                <div class="modal-dialog  modal-md" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="examplecontactLongTitle">Submit Project</h5>
+                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body ">
+                                                              <div class="card ">
+                                                                  <div class="card-body">
+                                                                      <div class="d-flex justify-content">
+                                                                        <div class="card-aside-img" style="width: 20%; margin-right: 15px;">
+                                                                            <a href="javascript:void(0)"></a>
+                                                                            <img src="../studentProfile/{{bit.task.image}}" alt="img-thumbnail" class="img-thumbnail">
+                                                                        </div>
+                                                                          <div class="text-body" style="width: 80%;">
+                                                                              <h5 >{{bit.task.title}}</h5>
+                                                                              <h6 class="text">৳ {{bit.task.budget}}</h6>
+                                                                              <p class="text"> exp:  {{bit.task.expdate}}</p>
+                                                                             
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                            <form action="/bitsubmit" method="post" enctype="multipart/form-data">
+                                                                {% csrf_token %}
+                                                                 
+                                                                  <div class="form-group">
+                                                                      <label class="font-weight-semibold" >Messages </label>
+                                                                     <textarea class="form-control" name="messages" id="" cols="20" rows="5" placeholder="write somthing"></textarea>
+                                                                  </div>
+                                                                  <div class="form-group">
+                                                                      <label class="font-weight-semibold" >Upload your file  </label>
+                                                                      <input type="file" class="form-control" name="projectfile" accept=".zip" id="">
+                                                                  </div>
+                                                           
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No </button>
+                                                           
+                                                              
+                                                                <input type="hidden" name="id" value="{{bit.id}}">
+                                                            
+                                                            <button type="submit" class="btn btn-success">Yes</button>
+                                                        </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /Message Modal --> 
+
+                                    {% endif %}
+                                      <a class="btn btn-outline-light btn-sm waves-effect waves-light"  data-bs-original-title="Cancel"  data-bs-toggle="modal" data-bs-target="#cancelbitin{{bit.id}}" ><i class="fa fa-times-circle fs-16"></i></a>
+                                      <!-- Message Modal -->
+                                          <div class="modal fade" id="cancelbitin{{bit.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                                              <div class="modal-dialog  modal-md" role="document">
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h5 class="modal-title" id="examplecontactLongTitle">Cancel Project</h5>
+                                                          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                      </div>
+                                                      <div class="modal-body text-center">
+                                                          <h2 class=''> Are you sure ?? </h2>
+                                                          <p> you went to cancel this Project </p> 
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No </button>
+                                                          <form action="/cancelbit" method="post">
+                                                              {% csrf_token %}
+                                                              <input type="hidden" name="id" value="{{bit.id}}">
+                                                          
+                                                          <button type="submit" class="btn btn-success">Yes</button>
+                                                      </form>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div><!-- /Message Modal --> 
+                                  
+                                  <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                  
+                                  {% else %}
+                                  <a class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="view"  href="/project/{{bit.task.slug}}"  href="/project/{{bit.task.slug}}"><i class="fe fe-eye fs-16"></i></a>
+                                  
+                                  {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                         
+                            {% endfor %}
+                       
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock profilerightcontent %}

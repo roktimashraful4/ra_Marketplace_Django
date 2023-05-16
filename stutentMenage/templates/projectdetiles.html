@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+	{% block title %} Project  {% endblock title %}
+	{% load static %}
+	{% block body %}
+	<!--Section-->
+    <section>
+        <div class="sptb-2 bannerimg">
+            <div class="header-text mb-0">
+                <div class="container">
+                   
+
+                    <div class="text-center text-white py-7">
+                        <h1 class="">{{project.title}}  </h1>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/Section-->
+</div>
+</div>
+
+
+		<!-- Shape Start -->
+        <div class="relative">
+            <div class="shape overflow-hidden text-white">
+                <svg viewBox="0 0 2880 48" fill="none" xmsns="http://www.w3.org/2000/svg">
+                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="#f5f4f9"></path>
+                </svg>
+            </div>
+        </div>
+        <!--Shape End-->
+    
+	<!--Section-->
+    <section class="sptb">
+        <div class="container">
+            {% for message in messages %}
+            <p class="fs-16 mt-5 alert alert-{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-12">
+                    <div class="card blog-detail">
+                        <div class="card-body">
+                            <div class="item7-card-img br-7 mb-5">
+                                <img src="../studentProfile/{{project.image}}" alt="img" class="w-100">
+                                <div class="item-card-text-bottom me-0">
+                                    <h4 class="mb-0">{{project.cetid.title}}</h4>
+                                 </div>
+                            </div>
+                            <a href="javascript:void(0)" class="text-dark"><h2 class="font-weight-semibold">{{project.title}}</h2></a>
+                            <div class="item7-card-desc d-md-flex mb-2 mt-3">
+                                <a href="javascript:void(0)" class="font-weight-semibold fs-16"><i class="fe fe-calendar me-2 text-primary"></i>{{project.uploaddata}}/  {{project.uploadtime}}</a>
+                               
+                            </div>
+                            <p>
+                                {{project.detiles|safe}}
+                            </p>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!--Rightside Content-->
+                <div class="col-xl-4 col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="../studentProfile/{{project.image}}" alt="img" class="img-responsive  border br-7">
+                            <div class="mt-4 mb-4 text-center">
+                                <div class="mb-2">
+                                    <span class="font-weight-semibold h2 text-default-dark mb-0">Budget ৳ {{project.budget}} /=
+                                    </span>
+                                    <p class="text-success font-weight-semibold mb-0 mt-1"><i class="fe fe-users me-1"></i>{{project.bittask_set.all|length}} Consistent are bit this project</p>
+                                </div>
+                                <span class="d-block">
+                                   
+                            </div>
+                            <div class="">
+                                {% if request.user.is_staff and not request.user.is_superuser %}
+                                    {% if exptime <= 0 %}
+                                     <div class="btn btn-danger btn-block"> Expiared</div>
+                                         
+                                     {% elif isBit == True %}
+                                     <a href='/{{request.user.username}}/mybitedtask' class="btn btn-success btn-block"> Go to Desboard </a>
+                                     {% else %}
+                                            <form action="/addtobittask" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="Uid" value="{{request.user.id}}">
+                                                <input type="hidden" name="task" value="{{project.slug}}">
+                                                <button type="submit"class="btn btn-block btn-primary mb-3 mb-xl-0"><span>Bit Project </span><i class="fe fe-arrow-right mt-1 ms-2 fs-14"></i></button>
+                                                
+                                            </form>
+                                       
+                                     {% endif %}
+                                {% else %}
+                                <a href="/login" class="btn btn-block btn-primary mb-3 mb-xl-0"><span>login</span><i class="fe fe-user mt-1 ms-2 fs-14"></i></a>
+                                <a href="/signup" class="btn btn-block btn-secondary mb-3 mb-xl-0"><span>signup </span> <i class="fe fe-user-plus mt-1 ms-2 fs-14"></i></a>
+                            
+                                {% endif %}
+                               </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Project Task Info</h3>
+                        </div>
+                        <div class="card-body ">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="fs-14 font-weight-bold text-default-dark">Expiary Date</span></td>
+                                        <td class="w-30 text-center"><span class="">:</span></td>
+                                        <td><span class="fs-14 font-weight-normal">{{project.expdate}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="fs-14 font-weight-bold text-default-dark">Expiary After </span></td>
+                                        <td class="w-30 text-center"><span class="">:</span></td>
+                                        <td><span class="fs-14 font-weight-normal">
+                                             
+                                            
+                                            {% if exptime <= 0 %}
+                                                 Expiared 
+                                                 {% elif exptime == 1 %}
+                                                  Today 
+                                                 {% elif exptime == 2%}
+                                                 yestardat
+                                               {% else %}
+                                               {{exptime}} Days
+
+                                             {% endif %}    
+                                            
+                                        
+                                        </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="fs-14 font-weight-bold text-default-dark">Task Cetagory</span></td>
+                                        <td class="w-30 text-center"><span class="">:</span></td>
+                                        <td><span class="fs-14 font-weight-normal">{{project.cetid.title}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="fs-14 font-weight-bold text-default-dark">Budget</span></td>
+                                        <td class="w-30 text-center"><span class="">:</span></td>
+                                        <td><span class="fs-14 font-weight-normal">{{project.budget}} /=</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="fs-14 font-weight-bold text-default-dark">Total Bit </span></td>
+                                        <td class="w-30 text-center"><span class="">:</span></td>
+                                        <td><span class="fs-14 font-weight-normal"> {{project.bittask_set.all|length}} Users  </span></td>
+                                    </tr>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"> Categories</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-catergory">
+                                <div class="item-list">
+                                    <ul class="list-group mb-0">
+                                        {% for cat in allcat %}
+                                        
+                                        <li class="list-group-item pt-0">
+                                            <a href="/categories/{{cat.slug}}" class="text-default-dark fs-14 font-weight-bold">
+                                                <i class="fa fa-map-signs bg-primary-light text-primary"></i> {{cat.title}}
+                                               
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                     
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                  
+                </div>
+                <!--/Rightside Content-->
+            </div>
+        </div>
+    </section><!--/Section-->
+
+
+
+
+
+    {% endblock body %}

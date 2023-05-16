@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+	{% block title %} Project  {% endblock title %}
+	{% load static %}
+	{% block body %}
+<!--Section-->
+				<!--Section-->
+				<section>
+					<div class="sptb-2 bannerimg">
+						<div class="header-text mb-0">
+							<div class="container">
+								<div class="text-center text-white py-7">
+									<h1 class="">Fisrt you Learn, Then you Earn... </h1>
+									<p class='font-weight-semibold ' style="letter-spacing:12px"> Patices makes man perfect </p>
+									
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</section><!--/Section-->
+			</div>
+		</div>
+
+		<!-- Shape Start -->
+        <div class="relative">
+            <div class="shape overflow-hidden text-white">
+                <svg viewBox="0 0 2880 48" fill="none" xmsns="http://www.w3.org/2000/svg">
+                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="#fff"></path>
+                </svg>
+            </div>
+        </div>
+        <!--Shape End-->
+
+
+
+		<section class="sptb Category">
+			<div class="container">
+                <div class="row">
+					<div class="col-12 col-md-12 col-lg-12 col-xl-12">
+						<div class="row">
+							{% for cat in allcat  %}
+							<div class="col-6 col-sm-12 col-lg-3 col-md-3  "  >
+								<a href="/categories/{{cat.slug}}" class="item-card overflow-hidden ">
+									<div class="item-card-desc">
+										<div class="card text-center overflow-hidden  ">
+											<div class="card-img">
+												<img src="studentProfile/{{cat.img}}" alt="img" class="cover-image">
+											</div>
+											<div class="item-card-text">
+												<h4 class="font-weight-semibold">{{cat.title}}</h4>
+												{% load days_counter %}
+												<span class="font-weight-bold text-white-80"><strong class="fs-18 font-weight-bold text-white">{{cat.addtask_set.all|cet_count}}</strong>  projects Runing </span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+							{% endfor %}
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	
+	
+
+		<!--Section-->
+		<section class="cover-image sptb bg-background-1" data-bs-image-src="{% static 'assets/images/banners/2.jpg' %} ">
+			<div class="header-text1 mb-0">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-8 col-lg-7 col-md-12">
+							<div class="text-white mt-xl-7 mb-5">
+								<h1 class="mb-3 display-3">Become an<span class="font-weight-semibold"> Student</span></h1>
+								<p class="fs-18 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+								<a href="" class="btn btn-secondary btn-lg me-2">Get Started Now</a>
+							</div>
+						</div>
+						<div class="col-xl-4 col-lg-5 col-md-12">
+							<div class="card mb-0 shadow-none">
+								<div class="card-body">
+									<h3 class="mb-5 font-weight-semibold">Sign Up Now!</h3>
+									<label class="h6 font-weight-normal">Full Name</label>
+									<div class="input-group mb-4">
+										<input type="text" class="form-control br-7" placeholder="Full Name">
+									</div>
+									<label class="h6 font-weight-normal">Email Address</label>
+									<div class="input-group mb-4">
+										<input type="text" class="form-control br-7" placeholder="Email">
+									</div>
+									<label class="h6 font-weight-normal">Password</label>
+									<div class="input-group mb-4">
+										<input type="password" class="form-control br-7" placeholder="Password">
+									</div>
+									<a class="btn btn-primary btn-lg btn-block" href="">Sign Up</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- /header-text -->
+		</section><!--/Section-->
+
+
+	
+
+	
+
+
+		<!--Section-->
+		<div class="position-relative">
+            <div class="shape overflow-hidden bottom-footer-shape">
+                <svg viewBox="0 0 2880 48" fill="none" xmsns="http://www.w3.org/2000/svg">
+                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+                </svg>
+            </div>
+        </div>
+		<!--/Section-->
+
+		{% endblock body %}

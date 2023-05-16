@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+	{% block title %} Project | Our Course {% endblock title %}
+	{% load static %}
+	{% block body %}
+	<!--Section-->
+    
+				<!--Section-->
+				<section>
+					<div class="sptb-2 bannerimg">
+						<div class="header-text mb-0">
+							<div class="container">
+								<div class="text-center text-white py-7">
+									<h1 class="">Our Courses </h1>
+									<ol class="breadcrumb text-center">
+										<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+										<li class="breadcrumb-item active text-white" aria-current="page">Contact Us</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section><!--/Section-->
+			</div>
+		</div>
+        <!-- Shape Start -->
+        <div class="relative">
+            <div class="shape overflow-hidden text-white">
+                <svg viewBox="0 0 2880 48" fill="none" xmsns="http://www.w3.org/2000/svg">
+                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="#fff"></path>
+                </svg>
+            </div>
+        </div>
+        <!--Shape End-->
+
+<div class="container">
+			<hr class="border-0">
+			<h2 class="">Take our ourse</h2>
+			<hr>
+<div class='row'>
+
+{% for  course in allcourse %}
+    <div class="col-lg-4 col-md-12">
+        <div class="card">
+            <div class="product-item2">
+                <div class="product-item2-img text-center bg-white p-0">
+                    <img src="{{img|random}}" alt="img"  class="w-100 h-100">
+                </div>
+
+            </div>
+            <div class="card-body">
+                <div class="product-item2-desc ">
+                    <h3 class="font-weight-semibold text-dark"><a href="javascript:void(0)" class=" text-default-dark"> {{course.curseName}} </a></h3>
+                    <p class="">
+                        {{course.dy}}
+                    </p>
+                    
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <div class="product-item-wrap d-flex">
+                    <div class="product-item-price">
+                        <span class="newprice text-dark">৳ {{course.courseFees}}</span>
+                        <del class="oldprice text-muted">৳ {{course.regularFees}} </del> 
+                    </div>
+                    <a href="" class="btn btn-success btn-sm ms-auto font-weight-bold ">Register Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock body %}

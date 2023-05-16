@@ -1,0 +1,303 @@
+
+{% extends "panel/basepanel.html" %}
+{% block title %} Project Course Detiles  {% endblock title %}
+{% load static %}
+{% block body %}	
+
+{% for message in messages %}
+            <p class="p-4 alert alert-{{ message.tags }} card-title">{{ message }}</p>
+            {% endfor %}
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title"> Bit list </h3>
+                </div>
+                <div class="card-body p-6">
+                    <div class="panel panel-primary">
+                        <div class=" tab-menu-heading">
+                            <div class="tabs-menu1 ">
+                                <!-- Tabs -->
+                                <ul class="nav panel-tabs">
+                                    <li class=""><a href="#tab1" class="active" data-bs-toggle="tab">All  </a></li>
+                                    <li><a href="#tab2" data-bs-toggle="tab">Panding</a></li>
+                                    <li><a href="#tab3" data-bs-toggle="tab">In Review</a></li>
+                                    <li><a href="#tab4" data-bs-toggle="tab">Complited </a></li>
+                                    <li><a href="#tab5" data-bs-toggle="tab">Canceled </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body tabs-menu-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active " id="tab1">
+                                  
+                                        
+                                       
+                                            <div class="table-responsive">
+                                                <table id="example2" class="hover table-bordered table border-bottom-0" >
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Bit Id </th>
+                                                            <th>Bit User </th>
+                                                            <th> status</th>
+                                                            
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for findupload in finduploads  %}
+                                                        <tr >
+                                                            <td>#  {{findupload.bitId.tastId}} </td>
+                                                            <td>
+                                                                {% for i  in  findupload.bitId.bitUser.profile_set.all%}
+                                                                {{i.fastname}} {{i.lestname}}
+                                                                 {% endfor %}
+                                                            </td>
+                                                            <td> 
+                                                                
+                                                                <span class="badge 
+                                                                 {% if findupload.bitId.status == 'processing'  %}
+                                                                 bg-primary
+                                                                 {% elif findupload.bitId.status == 'completed'  %}
+                                                                 bg-success
+                                                                 
+                                                                 {% elif findupload.bitId.status == 'in-review'  %}
+                                                                 bg-warning
+                                                                 {% else %}
+                                                                 bg-danger
+                                                                 {% endif %}
+                                                                
+                                                                ">{{findupload.bitId.status}}</span>
+                                                            
+                                                            </td>
+                                                          
+                                                          
+                                                            <td> 
+                                                                <a href="/bitlist/{{findupload.id}}" class="btn btn-outline-light btn-sm" ><i class="fe fe-eye fs-16"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                       
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                       
+                                    
+                                </div>
+                                <div class="tab-pane " id="tab2">
+                                    <div class="table-responsive">
+                                        <table id="example2" class="hover table-bordered table border-bottom-0" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Bit Id </th>
+                                                    <th>Bit User </th>
+                                                    <th> status</th>
+                                                    
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for findupload in finduploads  %}
+                                                {% if  findupload.bitId.status == 'processing' %}
+                                                <tr >
+                                                    <td>#  {{findupload.bitId.tastId}} </td>
+                                                    <td>
+                                                        {% for i  in  findupload.bitId.bitUser.profile_set.all%}
+                                                        {{i.fastname}} {{i.lestname}}
+                                                         {% endfor %}
+                                                    </td>
+                                                    <td> 
+                                                        
+                                                        <span class="badge 
+                                                         {% if findupload.bitId.status == 'processing'  %}
+                                                         bg-primary
+                                                         {% elif findupload.bitId.status == 'completed'  %}
+                                                         bg-success
+                                                         
+                                                         {% elif findupload.bitId.status == 'in-review'  %}
+                                                         bg-warning
+                                                         {% else %}
+                                                         bg-danger
+                                                         {% endif %}
+                                                        
+                                                        ">{{findupload.bitId.status}}</span>
+                                                    
+                                                    </td>
+                                                  
+                                                  
+                                                    <td> 
+                                                        <a href="/bitlist/{{findupload.id}}" class="btn btn-outline-light btn-sm" ><i class="fe fe-eye fs-16"></i></a>
+                                                    </td>
+                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
+                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane " id="tab3">
+                                    <div class="table-responsive">
+                                        <table id="example2" class="hover table-bordered table border-bottom-0" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Bit Id </th>
+                                                    <th>Bit User </th>
+                                                    <th> status</th>
+                                                    
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for findupload in finduploads  %}
+                                                {% if  findupload.bitId.status == 'in-review' %}
+                                                <tr >
+                                                    <td>#  {{findupload.bitId.tastId}} </td>
+                                                    <td>
+                                                        {% for i  in  findupload.bitId.bitUser.profile_set.all%}
+                                                        {{i.fastname}} {{i.lestname}}
+                                                         {% endfor %}
+                                                    </td>
+                                                    <td> 
+                                                        
+                                                        <span class="badge 
+                                                         {% if findupload.bitId.status == 'processing'  %}
+                                                         bg-primary
+                                                         {% elif findupload.bitId.status == 'completed'  %}
+                                                         bg-success
+                                                         
+                                                         {% elif findupload.bitId.status == 'in-review'  %}
+                                                         bg-warning
+                                                         {% else %}
+                                                         bg-danger
+                                                         {% endif %}
+                                                        
+                                                        ">{{findupload.bitId.status}}</span>
+                                                    
+                                                    </td>
+                                                  
+                                                  
+                                                    <td> 
+                                                        <a href="/bitlist/{{findupload.id}}" class="btn btn-outline-light btn-sm" ><i class="fe fe-eye fs-16"></i></a>
+                                                    </td>
+                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
+                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                               
+                                </div>
+                                <div class="tab-pane " id="tab4">
+                                    <div class="table-responsive">
+                                        <table id="example2" class="hover table-bordered table border-bottom-0" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Bit Id </th>
+                                                    <th>Bit User </th>
+                                                    <th> status</th>
+                                                    
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for findupload in finduploads  %}
+                                                {% if  findupload.bitId.status == 'completed' %}
+                                                <tr >
+                                                    <td>#  {{findupload.bitId.tastId}} </td>
+                                                    <td>
+                                                        {% for i  in  findupload.bitId.bitUser.profile_set.all%}
+                                                        {{i.fastname}} {{i.lestname}}
+                                                         {% endfor %}
+                                                    </td>
+                                                    <td> 
+                                                        
+                                                        <span class="badge 
+                                                         {% if findupload.bitId.status == 'processing'  %}
+                                                         bg-primary
+                                                         {% elif findupload.bitId.status == 'completed'  %}
+                                                         bg-success
+                                                         
+                                                         {% elif findupload.bitId.status == 'in-review'  %}
+                                                         bg-warning
+                                                         {% else %}
+                                                         bg-danger
+                                                         {% endif %}
+                                                        
+                                                        ">{{findupload.bitId.status}}</span>
+                                                    
+                                                    </td>
+                                                  
+                                                  
+                                                    <td> 
+                                                        <a href="/bitlist/{{findupload.id}}" class="btn btn-outline-light btn-sm" ><i class="fe fe-eye fs-16"></i></a>
+                                                    </td>
+                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
+                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                               
+                                </div>
+                                <div class="tab-pane " id="tab5">
+                                    <div class="table-responsive">
+                                        <table id="example2" class="hover table-bordered table border-bottom-0" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Bit Id </th>
+                                                    <th>Bit User </th>
+                                                    <th> status</th>
+                                                    
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for findupload in finduploads  %}
+                                                {% if  findupload.bitId.status == 'cancel' %}
+                                                <tr >
+                                                    <td>#  {{findupload.bitId.tastId}} </td>
+                                                    <td>
+                                                        {% for i  in  findupload.bitId.bitUser.profile_set.all%}
+                                                        {{i.fastname}} {{i.lestname}}
+                                                         {% endfor %}
+                                                    </td>
+                                                    <td> 
+                                                        
+                                                        <span class="badge 
+                                                         {% if findupload.bitId.status == 'processing'  %}
+                                                         bg-primary
+                                                         {% elif findupload.bitId.status == 'completed'  %}
+                                                         bg-success
+                                                         
+                                                         {% elif findupload.bitId.status == 'in-review'  %}
+                                                         bg-warning
+                                                         {% else %}
+                                                         bg-danger
+                                                         {% endif %}
+                                                        
+                                                        ">{{findupload.bitId.status}}</span>
+                                                    
+                                                    </td>
+                                                  
+                                                  
+                                                    <td> 
+                                                        <a href="/bitlist/{{findupload.id}}" class="btn btn-outline-light btn-sm" ><i class="fe fe-eye fs-16"></i></a>
+                                                    </td>
+                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
+                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                               
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+					
+{% endblock body %}
+

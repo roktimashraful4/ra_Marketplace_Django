@@ -1,0 +1,53 @@
+
+{% extends "panel/basepanel.html" %}
+{% block title %} Project Deshborard  {% endblock title %}
+{% load static %}
+{% block headingtitle %} Add new task  {% endblock headingtitle %}
+{% block style %}
+
+  <style>
+    .card-body p{
+        text-align:left;
+    }
+    .card-body p  label{
+        font-weight: bold;
+    }
+    .django-ckeditor-widget{
+        width:100%;
+    }
+    .errorlist{
+       color: brown;
+    }
+    
+  </style>
+  {% endblock style %}
+{% block headingtitletag %} addnewtask  {% endblock headingtitletag %}
+{% block body %}
+			
+<div class="col-xl-12">
+    <div class="card m-b-20">
+        <div class="card-header">
+            {% for message in messages %}
+            <h3 class="text-{{ message.tags }} card-title">{{ message }}</h3>
+            {% endfor %}
+        </div>
+        <div class="card-body mb-0">
+            <form class="form-horizontal" action='' enctype="multipart/form-data" method='post' >
+            {% csrf_token %}
+                {{form.media}}
+                {{form.as_p}}
+               
+                <div class="form-group mb-0 ">
+                  
+                        <button type="submit" class="btn  btn-primary waves-effect waves-light">Save</button>
+                   
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+					
+
+				
+{% endblock body %}
+

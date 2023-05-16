@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+	{% load static %}
+<head>
+		<!-- Meta data -->
+		<meta charset="UTF-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+		<!-- Favicon -->
+		<link rel="icon" href="{%static 'assets/images/brand/favicon.ico'%}" type="image/x-icon"/>
+		<link rel="shortcut icon" type="image/x-icon" href="{%static 'assets/images/brand/favicon.ico'%}" />
+
+		<!-- Title -->
+		<title>{% block title %}{% endblock title %}</title>
+
+		<!-- Bootstrap css -->
+		<link href="{%static 'admin/assets/plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet" />
+
+		<!-- Sidemenu Css -->
+		<link href="{%static 'admin/assets/css/sidemenu.css' %}" rel="stylesheet" />
+
+		<!-- Dashboard Css -->
+		<link href="{%static 'admin/assets/css/style.css' %}" rel="stylesheet" />
+		<link href="{%static 'admin/assets/css/admin-custom.css' %}" rel="stylesheet" />
+
+		<!-- c3.js Charts Plugin -->
+		<link href="{%static 'admin/assets/plugins/charts-c3/c3-chart.css' %}" rel="stylesheet" />
+
+		<!-- Data table css -->
+		<link href="{%static 'admin/assets/plugins/datatable/css/dataTables.bootstrap5.min.css' %}" rel="stylesheet" />
+		<link href="{%static 'admin/assets/plugins/datatable/css/jquery.dataTables.min.css' %}" rel="stylesheet" />
+
+		<!-- P-scroll bar css-->
+		<link href="{%static 'admin/assets/plugins/pscrollbar/pscrollbar.css' %}" rel="stylesheet" />
+
+		<!---Font icons-->
+		<link href="{%static 'admin/assets/css/icons.css' %}" rel="stylesheet"/>
+
+		<!--Select2 css -->
+		<link href="{%static 'admin/assets/plugins/select2/select2.css' %}" rel="stylesheet" />
+
+		<!-- Switcher css -->
+		<link  href="{%static 'admin/assets/switcher/css/switcher.css' %}" rel="stylesheet" id="switcher-css" type="text/css" media="all"/>
+
+		<!-- Color Skin css -->
+		<link id="theme" rel="stylesheet" type="text/css" media="all" href="{%static 'admin/assets/color-skins/color.css' %}" />
+		
+		{% block style %}{% endblock style %}
+	</head>
+
+	<body class="app sidebar-mini">
+
+		
+
+		<!--Loader-->
+		<div id="global-loader">
+			<img src="{% static 'assets/images/loader.svg' %}" class="loader-img" alt="">
+		</div>
+		<!--/Loader-->
+
+		<!--Page-->
+		<div class="page">
+			<div class="page-main">
+
+					<!--App-Header-->
+				<div class="app-header1 header py-2 d-flex">
+					<div class="container-fluid">
+						<div class="d-flex">
+							<a class="header-brand" href="index.html">
+								<img src="{%static 'admin/assets/images/brand/logo.png' %}" class="header-brand-img desktop-logo" alt="logo">
+								<img src="{%static 'admin/assets/images/brand/favicon.png' %}" class="header-brand-img mobile-logo" alt="logo">
+							</a>
+							<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"><i class=""><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></i></a>
+							
+							<div class="d-flex order-lg-2 ms-auto heaader-right">
+								<button class="navbar-toggler navresponsive-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+									<i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+								</button>
+								<div class="p-0 mb-0 navbar navbar-expand-lg  responsive-navbar navbar-dark  ">
+									<div class="navbar-collapse collapse" id="navbarSupportedContent-4">
+										<div class="d-flex">
+											<div class="header-navsearch">
+												<a href="javascript:void(0)" class=" "></a>
+												<form class="form-inline me-auto">
+													<div class="nav-search">
+														<input type="search" class="form-control header-search" placeholder="Search…" aria-label="Search" >
+														<button class="btn" type="submit"><i class=""><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></i></button>
+													</div>
+												</form>
+											</div>
+											<div class="header-navicon">
+												<a href="javascript:void(0)" data-bs-toggle="search" class="nav-link d-lg-none navsearch-icon">
+													<i class=""><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></i>
+												</a>
+											</div>
+											<div class="dropdown d-flex" >
+												<a  class="nav-link icon full-screen-link">
+													<i class=""  id="fullscreen-button"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></i>
+												</a>
+											</div>
+											
+											<div class="dropdown header-user ">
+												<a href="javascript:void(0)" class="nav-link leading-none user-img" data-bs-toggle="dropdown">
+													<img src="{%static 'admin/assets/images/users/male/20.jpg' %}" alt="profile-img" class="avatar">
+												</a>
+												<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow ">
+													<a class="dropdown-item" href="profile.html">
+														<i class="dropdown-icon icon icon-user"></i> My Profile
+													</a>
+													<a class="dropdown-item" href="emailservices.html">
+														<i class="dropdown-icon icon icon-speech"></i> Inbox
+													</a>
+													<a class="dropdown-item" href="editprofile.html">
+														<i class="dropdown-icon  icon icon-settings"></i> Account Settings
+													</a>
+													<a class="dropdown-item" href="login.html">
+														<i class="dropdown-icon  icon icon-power"></i> Log out
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--/App-Header-->
+
+				<!-- Sidebar menu-->
+				<div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+				<aside class="app-sidebar doc-sidebar">
+					<a class="header-brand sidemenu-header-brand" href="/useradminpanel">
+						<img src="{%static 'admin/assets/images/brand/logo-white.png' %}" class="header-brand-img desktop-logo" alt="Lmslist logo">
+						<img src="{%static 'admin/assets/images/brand/favicon.png' %}" class="header-brand-img mobile-logo" alt="Lmslist logo">
+					</a>
+					<div class="app-sidebar__user clearfix">
+						<div class="dropdown user-pro-body">
+							<div>
+								<img src="{%static 'admin/assets/images/users/male/20.jpg' %}"alt="user-img" class="avatar avatar-lg brround">
+								<span class="avatar-status profile-status bg-green"></span>
+							</div>
+							<div class="user-info">
+								<h2>Admin User </h2>
+								<span> Administetor </span>
+							</div>
+						</div>
+					</div>
+					<ul class="side-menu">
+						
+						
+						<li class="slide">
+							<a class="side-menu__item" href="/useradminpanel"><i class="fa fa-home side-menu__icon"></i><span class="side-menu__label"> Deshborard</span></a>
+						</li>
+
+                        <li class="slide">
+							<a class="side-menu__item slide-show" href="#"><i class="fa fa-book side-menu__icon"></i><span class="side-menu__label">Manage Courses</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="/addnewcourse" class="slide-item">add new Course</a>
+								</li>
+								<li>
+									<a href="/courselist" class="slide-item">Course lists </a>
+								</li>
+								
+							</ul>
+						</li>
+
+                        <li class="slide">
+							<a class="side-menu__item slide-show" href="#"><i class="fa fa-users side-menu__icon"></i><span class="side-menu__label">Students</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="/addstudent" class="slide-item">add new Student</a>
+								</li>
+								<li>
+									<a href="/studentlist" class="slide-item">Student lists </a>
+								</li>
+								
+							</ul>
+						</li>
+                        <li class="slide">
+							<a class="side-menu__item slide-show" href="#"><i class="fa fa-clipboard side-menu__icon"></i><span class="side-menu__label">Task Projects</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li>
+									<a href="/taskcetagery" class="slide-item"> task cetagary </a>
+								</li>
+								<li>
+									<a href="/newtask" class="slide-item">Add new Task </a>
+								</li>
+								<li>
+									<a href="/tasklist" class="slide-item">Task List</a>
+								</li>
+								
+							</ul>
+						</li>
+                       
+
+						<li class="slide">
+							<a class="side-menu__item" href="/bitlist"><i class="fa fa-graduation-cap side-menu__icon"></i><span class="side-menu__label"> Bit List </span></a>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" href="/bitpaymentrequest"><i class="fa fa-graduation-cap side-menu__icon"></i><span class="side-menu__label"> Payment Request </span></a>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" href="#"><i class="fa fa-graduation-cap side-menu__icon"></i><span class="side-menu__label"> Find Certificate </span></a>
+						</li>
+						<li class="slide">
+							<a class="side-menu__item" href="/billinglist"><i class="fa fa-money side-menu__icon"></i><span class="side-menu__label"> Billing Account </span></a>
+						</li>
+
+                        <li class="slide">
+							<a class="side-menu__item" href="logout"><i class="fa fa-sign-out side-menu__icon"></i><span class="side-menu__label"> Log out </span></a>
+						</li>
+                      
+
+			
+
+						
+
+                       
+
+
+
+						
+					
+					</ul>
+				</aside>
+				<!-- /Sidebar menu-->
+
+                	<!--App-Content-->
+				<div class="app-content  my-3 my-md-5">
+					<div class="side-app">
+
+						<!--Page-Header-->
+						<div class="page-header">
+							<h4 class="page-title"> {% block headingtitle %}{% endblock headingtitle %} </h4>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+								<li class="breadcrumb-item active" aria-current="page"> {% block headingtitletag %}{% endblock headingtitletag %} </li>
+							</ol>
+						</div>
+
+      {% block body %}{% endblock body %}
+                        		
+					</div>
+				</div>
+			</div>
+    </div>
+</div>
+                			<!--Footer-->
+			<footer class="footer">
+				<div class="container">
+					<div class="row align-items-center flex-row-reverse">
+						<div class="col-lg-12 col-sm-12 mt-3 mt-lg-0 text-center">
+							Copyright © 2022 <a href=""  class="text-primary">Genarel IT </a>. Designed with <span class="fa fa-heart text-danger"></span> by <a href="" class="text-primary"> Roktim Ashraful </a> All rights reserved.
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!--/Footer-->
+		</div>
+
+		<!-- Back to top -->
+		<a href="#top" id="back-to-top" ><i class="fa fa-long-arrow-up"></i></a>
+
+		<!-- JQuery js-->
+		<script src="{%static 'admin/assets/js/jquery-3.2.1.min.js' %}"></script>
+
+		<!-- Bootstrap js -->
+		<script src="{%static 'admin/assets/plugins/bootstrap/js/popper.min.js' %}"></script>
+		<script src="{%static 'admin/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<!--JQuery Sparkline Js-->
+		<script src="{%static 'admin/assets/js/jquery.sparkline.min.js' %}"></script>
+
+		<!-- Circle Progress Js-->
+		<script src="{%static 'admin/assets/js/circle-progress.min.js' %}"></script>
+
+		<!-- Star Rating Js-->
+		<script src="{%static 'admin/assets/plugins/jquery-bar-rating/jquery.barrating.js' %}"></script>
+		<script src="{%static 'admin/assets/plugins/jquery-bar-rating/js/rating.js' %}"></script>
+
+		<!-- Fullside-menu Js-->
+		<script src="{%static 'admin/assets/plugins/sidemenu/sidemenu.js' %}"></script>
+
+		<!--Select2 js -->
+		<script src="{%static 'admin/assets/plugins/select2/select2.full.min.js' %}"></script>
+		<script src="{%static 'admin/assets/js/select2.js' %}"></script>
+
+		<!-- Data tables -->
+		<script src="{%static 'admin/assets/plugins/datatable/js/jquery.dataTables.min.js' %}"></script>
+		<script src="{%static 'admin/assets/plugins/datatable/js/dataTables.bootstrap5.min.js' %}"></script>
+		<script src="{%static 'admin/assets/js/datatable.js' %}"></script>
+
+		<!-- Custom scroll bar Js-->
+		<script src="{%static 'admin/assets/plugins/pscrollbar/pscrollbar.js' %}"></script>
+		<script src="{%static 'admin/assets/plugins/pscrollbar/pscroll.js' %}"></script>
+
+		<!--Counters -->
+		<script src="{%static 'admin/assets/plugins/counters/counterup.min.js' %}"></script>
+		<script src="{%static 'admin/assets/plugins/counters/waypoints.min.js' %}"></script>
+
+		<!-- CHARTJS CHART -->
+		<script src="{%static 'admin/assets/plugins/chart/Chart.bundle.js' %}"></script>
+		<script src="{%static 'admin/assets/plugins/chart/utils.js' %}"></script>
+
+		<!-- Index Scripts -->
+		<script src="{%static 'admin/assets/js/index2.js' %}"></script>
+
+		<!-- Switcher js -->
+		<script src="{%static 'admin/assets/switcher/js/switcher.js' %}"></script>
+
+		<!-- Custom Js-->
+		<script src="{%static 'admin/assets/js/admin-custom.js' %}"></script>
+
+	</body>
+</html>

@@ -1,0 +1,338 @@
+
+{% extends "panel/basepanel.html" %}
+{% block title %} Project Deshborard  {% endblock title %}
+{% load static %}
+{% block body %}
+			
+
+						<div class="row row-cards">
+							<div class="col-sm-12 col-lg-6 col-xl-3">
+								<div class="card ">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-8 text-start">
+												<h5 class="mb-3">Total Students</h5>
+												<h2 class="mb-2 font-weight-bold text-primary">{{total_student}}</h2>
+											</div>
+											<div class="text-end counter-2 my-auto col-4">
+												<div class="counter-icon1 bg-primary">
+													<i class="icon icon-people text-white"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12 col-lg-6 col-xl-3">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-8 text-start">
+												<h5 class="mb-3">Total Paying  </h5>
+												<h2 class="mb-2 font-weight-bold text-warning">৳ {{totalPay}}</h2>
+											</div>
+											<div class="text-end counter-2 my-auto col-4">
+												<div class="counter-icon1 bg-warning">
+													<i class="icon icon-book-open text-white"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12 col-lg-6 col-xl-3">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-8 text-start">
+												<h5 class="mb-3">Total Courses </h5>
+												<h2 class="mb-2 font-weight-bold text-secondary">{{total_course}}</h2>
+												</div>
+											<div class="text-end counter-2 my-auto col-4">
+												<div class="counter-icon1 bg-secondary">
+													<i class="icon icon-graduation text-white"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12 col-lg-6 col-xl-3">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-8 text-start">
+												<h5 class="mb-3">New Students</h5>
+												<h2 class="mb-2 font-weight-bold text-info">55,250</h2>
+												<p class="mb-0"><span class="text-danger"><i class="fa fa-arrow-down text-danger me-1"> </i>5.25%</span> in Last Year</p>
+											</div>
+											<div class="text-end counter-2 my-auto col-4">
+												<div class="counter-icon1 bg-info">
+													<i class="icon icon-user-follow text-white"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						
+						
+{% for message in messages %}
+<p class="p-4 alert alert-{{ message.tags }} card-title">{{ message }}</p>
+{% endfor %}
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header" style="display: flex; justify-content: space-between;">
+							
+							<h3 class="card-title">Courses List</h3>
+							<a href="/addnewcourse" class="btn btn-success " > Add new Course </a>
+						</div>
+						
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="data-table-example table table-striped table-bordered table-vcenter text-nowrap">
+									<thead>
+										<tr>
+											
+											<th>course Name</th>
+										
+											<th>Course Type</th>
+											<th>Amount</th>
+											<th>creadit</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for course in courses %}
+										<tr>
+											<td> {{course.curseName}}  </td>
+											
+											<td>Offline</td>
+											<td>৳ {{course.courseFees}}</td>
+											<td class="text-nowrap">{{course.courseCradit}}</td>
+											
+											<td>
+												<a class="btn btn-outline-light btn-sm waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" data-bs-target="#exampleModa{{course.id}}" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>
+												<a class="btn btn-outline-light btn-sm waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" href="#modaldemo{{course.id}}"  data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>
+												
+											</td>
+											<div class="modal fade" id="exampleModa{{course.id}}" tabdocumentation="-1" role="dialog"  aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="example-Modal3">Edit Course</h5>
+															<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form action="hendel_course_update" method="post">
+																<input type='hidden' name="e_c_id" value='{{course.id}}' /> 
+																{% csrf_token %}
+																<div class="form-group">
+																	<label for="coursename"  class="form-control-label">Course Name </label>
+																	<input type="text" class="form-control" id="coursename" name='e_coursename' value='{{course.curseName}}' required >
+																</div>
+																<div class="form-group">
+																	<label for="coursename"  class="form-control-label">Course Cradit </label>
+																	<input type="number" min="1" class="form-control" id="coursename" name='e_coursecreadit' value='{{course.courseCradit}}' required >
+																</div>
+																<div class="form-group">
+																	<label for="courseFees"  class="form-control-label"> Fess </label>
+																	<input type="number" class="form-control" id="courseFees" name='e_courseFees' value='{{course.courseFees}}' required >
+																</div>
+																<div class="form-group">
+																	<label for="courseFees"  class="form-control-label">Reguler Fess </label>
+																	<input type="number" class="form-control" id="courseFees" name='e_Reguler' value='{{course.regularFees}}' required >
+																</div>
+																<div class="form-group">
+																	<label for="courseFees"  class="form-control-label">Description </label>
+																	<textarea name="e_dy" class="form-control" cols="30" rows="3">{{course.dy}}</textarea>
+																	</div>
+																
+															
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+															<button type="submit" class="btn btn-primary"> Save Update </button>
+														</div>
+													</form>
+													</div>
+												</div>
+											</div>
+											<div class="modal fade" id="modaldemo{{course.id}}">
+												<div class="modal-dialog modal-dialog-centered text-center" role="document">
+													<div class="modal-content modal-content-demo">
+														<div class="modal-header">
+															<h6 class="modal-title">Warning </h6>
+															<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<h2> Are you sure ??</h2>
+															<p>You went to delete data from your datebase. </p>
+														</div>
+														<div class="modal-footer">
+															<form action="hendel_c_delete" method="post">
+																{% csrf_token %}
+																<input type="hidden" name="e_c_idi" value="{{course.id}}">
+																<button class="btn btn-primary" type="submit">DELETE</button> 
+															</form>
+															<button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										</tr>
+										{% endfor %}
+									
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header" style="display: flex; justify-content: space-between;">
+							<h3 class="card-title">Student List</h3>
+							<a href="/addstudent" class="btn btn-success " > Add new student </a>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="data-table-example table table-striped table-bordered table-vcenter text-nowrap">
+									<thead>
+										<tr>
+										  
+											<th>Student Id</th>
+											<th>Image</th>
+											<th>Student Name</th>
+											<th>Phone Number </th>
+											<th>Course Type</th>
+											<th>Amount</th>                                            
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+									   
+									{% for s in students %}
+										<tr>
+										   
+											<td>{{s.id}} </td>
+											<td><a href="/studentprofile/{{s.id}}"><img src="studentProfile/{{s.img}}" alt="" class="w-8 h-8 br-7 border p-2"></a></td>
+											<td><a href="/studentprofile/{{s.id}}"> {{s.FastName}} {{s.lestName}} </a></td>
+											<td>{{s.Phonenumber}} </td>
+											<td>Offline</td>
+											<td>৳ {{s.courseId.courseFees}}</td>
+											<td>
+												<a class="btn btn-outline-light btn-sm waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" data-bs-target="#studentexampleModa{{s.id}}" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>
+												<a class="btn btn-outline-light btn-sm waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" href="#Sdeletmodaldemo{{s.id}}"  data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>
+															
+											</td>
+											<div class="modal fade" id="studentexampleModa{{s.id}}" tabdocumentation="-1" role="dialog"  aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="studentexampleModa{{s.id}}">New message</h5>
+															<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form action="hendel_student_update" method="post">
+																<input type='hidden' name="e_s_id" value='{{s.id}}' /> 
+																{% csrf_token %}
+																<div class="form-group">
+																	<label for="fastname"  class="form-control-label">First Name </label>
+																	<input type="text" class="form-control" id="fastname" name='e_fastname' value='{{s.FastName}}' required >
+																</div>
+																<div class="form-group">
+																	<label for="lestname"  class="form-control-label">Least Name </label>
+																	<input type="text"  class="form-control" id="lestname" name='e_lestname' value='{{s.lestName}}' required >
+																</div>
+																<div class="form-group">
+																	<label for="fathername"  class="form-control-label">Father Name </label>
+																	<input type="text" class="form-control" id="fathername" name='e_fathername' value='{{s.FatherName}}' required >
+																</div>
+																<div class="form-group">
+																	<label for="mothername"  class="form-control-label">Mother Name </label>
+																	<input type="text" class="form-control" id="mothername" name='e_mothername' value='{{s.MotherName}}' required >
+																</div>
+																<div class="form-group">
+																	<label for="phone"  class="form-control-label">Phone Number </label>
+																	<input type="text" class="form-control" id="phone" name='e_phone' value='{{s.Phonenumber}}' required >
+																</div>
+																<div class="form-group">
+																	<label for="email"  class="form-control-label">Email </label>
+																	<input type="email" class="form-control" id="email" name='e_email' value='{{s.email}}' required >
+																</div>
+																<div class="form-group">
+																	<label for="dob"  class="form-control-label">date of birth <b> {{s.dob}} </b> </label>
+																	<input type="date" class="form-control" id="dob"  name='e_dob' value='{{s.dob}}'  >
+																</div>
+																
+															
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+															<button type="submit" class="btn btn-primary"> Save Update </button>
+														</div>
+													</form>
+													</div>
+												</div>
+											</div>
+											<div class="modal fade" id="Sdeletmodaldemo{{s.id}}">
+												<div class="modal-dialog modal-dialog-centered text-center" role="document">
+													<div class="modal-content modal-content-demo">
+														<div class="modal-header">
+															<h6 class="modal-title">Warning </h6>
+															<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<h2> Are you sure ??</h2>
+															<p>You went to delete data from your datebase. </p>
+														</div>
+														<div class="modal-footer">
+															<form action="hendel_s_delete" method="post">
+																{% csrf_token %}
+																<input type="hidden" name="e_s_idi" value="{{s.id}}">
+																<button class="btn btn-primary" type="submit">DELETE</button> 
+															</form>
+															<button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			 
+			</div>
+
+	
+		</div>
+
+	
+			
+		
+
+						
+					</div>
+				
+{% endblock body %}
+

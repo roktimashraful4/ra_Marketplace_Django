@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+	{% block title %} Project | about {% endblock title %}
+	{% load static %}
+	{% block body %}
+	<!--Section-->
+	
+    
+				<!--Section-->
+				<section>
+					<div class="sptb-2 bannerimg">
+						<div class="header-text mb-0">
+							<div class="container">
+								<div class="text-center text-white py-7">
+									<h1 class="">Categories </h1>
+									<ol class="breadcrumb text-center">
+										<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+										<li class="breadcrumb-item active text-white" aria-current="page">Contact Us</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section><!--/Section-->
+			</div>
+		</div>
+
+		<!-- Shape Start -->
+        <div class="relative">
+            <div class="shape overflow-hidden text-white">
+                <svg viewBox="0 0 2880 48" fill="none" xmsns="http://www.w3.org/2000/svg">
+                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="#fff"></path>
+                </svg>
+            </div>
+        </div>
+        <!--Shape End-->
+
+		
+
+		<!--Section-->
+		<section class="sptb bg-white">
+			<div class="container">
+				<div class="section-title d-md-flex mb-5">
+					<div>
+						<h2>Project Task </h2>
+						<p class="fs-18 lead"> Bit our project task and earn </p>
+					</div>
+					{% comment %} <div class="ms-auto">
+						<a class="btn btn-primary mt-3" href="javascript:void(0)"><i class="fe fe-arrow-right"></i> View All</a>
+					</div> {% endcomment %}
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row  Categorie-1">
+                            {% for cat in allcat %}
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="mb-5">
+                                        <div class="card-header border">
+                                            <a href="javascript:void(0)" class="text-dark"><div class="card-title h3"><i class="fa fa-map-signs me-2"></i><span class="font-weight-semibold">{{cat.title}}</span> </div></a>
+                                        </div>
+                                        <div class="card-body border">
+                                            <ul class="list-unstyled widget-spec  p-1">
+                                                {% for ds in  cat.addtask_set.all %}
+                                                    {% if forloop.counter <= 5 %} 
+													 	{% if  now <= ds.expdate  %}
+                                                			<li class=""><a href="project/{{ds.slug}}" class="text-default"><i class="fa fa-hand-o-right text-primary"></i> {{ds.title}}</a></li>
+														{% endif %}
+													{% endif %}
+												{% endfor %}
+                                                <li class="mb-0 mt-4"><a href="categories/{{cat.slug}}" class="text-primary ms-auto">View more..</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!--/Section-->
+
+	
+	
+
+ 
+
+    {% endblock body %}

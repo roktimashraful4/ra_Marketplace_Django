@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+	{% block title %} Project | about {% endblock title %}
+	{% block style %} 
+	<style>
+		#downloadpage, #chackmail{
+			display: none;
+			transition: 1s ease-out ;
+		}
+	</style>
+	
+	{% endblock style %}
+	{% load static %}
+	{% block body %}
+	<!--Section-->
+    
+				<!--Section-->
+				<section>
+					<div class="sptb-2 bannerimg">
+						<div class="header-text mb-0">
+							<div class="container">
+								<div class="text-center text-white py-7">
+									<h1 class="">Get your cirtificate</h1>
+									<ol class="breadcrumb text-center">
+										<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+										<li class="breadcrumb-item active text-white" aria-current="page">Get cirtificate</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section><!--/Section-->
+			</div>
+		</div>
+
+		<!-- Shape Start -->
+        <div class="relative">
+            <div class="shape overflow-hidden text-white">
+                <svg viewBox="0 0 2880 48" fill="none" xmsns="http://www.w3.org/2000/svg">
+                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="#fff"></path>
+                </svg>
+            </div>
+        </div>
+        <!--Shape End-->
+
+		
+
+		<!--Contact-->
+		<div class="sptb">
+			<div class="container">
+				<div class="row">
+				    <div class="col-lg-7 col-xl-7 col-md-12 mx-auto">
+						<div class="card mb-0 single-page customerpage contact " id="mailsent">
+							<div class="card-body wrapper wrapper2 box-shadow-0">
+								<div class="mb-6 text-dark">
+									<h5 class="fs-25 font-weight-semibold">Get your Cirtificate</h5>
+									<p class="fs-16">If you are going to use a passage of Lorem Ipsum</p>
+								</div>
+								
+									
+									<div class="mail">
+										<label>Enter your Email </label>
+										<input type="email" name="mail">
+									</div>
+									
+									<div class="submit mt-5">
+										<button  id="email" onclick="sendmail()" class="btn btn-primary">Send </button>
+									</div>
+							
+							</div>
+						</div>
+
+						<div class="card mb-0 single-page customerpage contact " id="chackmail">
+							<div class="card-body wrapper wrapper2 box-shadow-0">
+								<div class="mb-6 text-dark">
+									<h5 class="fs-25 font-weight-semibold">Verify It's you</h5>
+									<p class="fs-16">chack your email and type blow to six digit code </p>
+								</div>
+								
+									
+									<div class="mail">
+										<label>Enter your Email </label>
+										<input type="text" name="mailverify">
+									</div>
+									
+									<div class="submit mt-5">
+										<button  class="btn btn-primary">Verify </button>
+									</div>
+								
+							</div>
+						</div>
+
+						<div class="card mb-0 single-page customerpage contact " id="downloadpage">
+							<div class="card-body wrapper wrapper2 box-shadow-0">
+								<div class="mb-6 text-dark">
+									<h5 class="fs-25 font-weight-semibold">Get your Cirtificate</h5>
+									<p class="fs-16">If you are going to use a passage of Lorem Ipsum</p>
+								</div>
+								<form id="" class="" tabindex="500">
+									
+									<div class="mail">
+										<label>Enter your Email </label>
+										<input type="email" name="mail">
+									</div>
+									
+									<div class="submit">
+										<a href="" id="email" class="btn btn-primary">Send </a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/Contact-->
+
+	<script>
+		function sendmail() {
+			document.getElementById('mailsent').style.transition= '1s all';
+			document.getElementById('mailsent').style.display= 'None';
+			document.getElementById('chackmail').style.transition= '1s all';
+			document.getElementById('chackmail').style.display= 'block';
+
+		}
+	</script>
+        
+ 
+
+    {% endblock body %}

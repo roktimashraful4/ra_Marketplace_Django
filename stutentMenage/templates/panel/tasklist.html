@@ -1,0 +1,138 @@
+
+{% extends "panel/basepanel.html" %}
+{% block title %} Project Student List  {% endblock title %}
+{% load static %}
+{% block body %}	
+
+{% for message in messages %}
+            <p class="p-4 alert alert-{{ message.tags }} card-title">{{ message }}</p>
+            {% endfor %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header" style="display: flex; justify-content: space-between;">
+                            <h3 class="card-title">task List</h3>
+                            <a href="/newtask" class="btn btn-outline-primary " > New Task List </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="data-table-example table table-striped table-bordered table-vcenter text-nowrap">
+                                    <thead>
+                                        <tr>
+                                          
+                                            <th> Id</th>
+                                            <th>Image</th>
+                                            <th>Title</th>
+                                            <th>Cetagory </th>
+                                            <th>uplooad time</th>                                            
+                                            <th>Budget</th>                                            
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    {% for task in tasks %}
+                                        <tr>
+                                           
+                                            <td>{{task.id}} </td>
+                                            <td><a href="/studentprofile/{{task.id}}"><img src="studentProfile/{{task.image}}" alt="" class="w-8 h-8 br-7 border p-2"></a></td>
+                                            <td><a href="/studentprofile/{{s.id}}"> {{task.title}} </a></td>
+                                            <td>{{task.cetid.title}} </td>
+                                            <td>{{task.uploadtime}} <br>
+                                            {{task.uploaddata}} </td>
+                                            
+                                            <td>৳ {{task.budget}}</td>
+                                            <td>
+                                                <a class="btn btn-outline-light btn-sm waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" data-bs-target="#exampleModa{{s.id}}" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>
+												<a class="btn btn-outline-light btn-sm waves-effect waves-light modal-effect" data-bs-effect="effect-newspaper" data-bs-toggle="modal" href="#modaldemo{{s.id}}"  data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>
+															
+                                            </td>
+                                            {% comment %} <div class="modal fade" id="exampleModa{{s.id}}" tabdocumentation="-1" role="dialog"  aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModa{{s.id}}">New message</h5>
+                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="hendel_student_update" method="post">
+                                                                <input type='hidden' name="e_s_id" value='{{s.id}}' /> 
+                                                                {% csrf_token %}
+                                                                <div class="form-group">
+                                                                    <label for="fastname"  class="form-control-label">First Name </label>
+                                                                    <input type="text" class="form-control" id="fastname" name='e_fastname' value='{{s.FastName}}' required >
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="lestname"  class="form-control-label">Least Name </label>
+                                                                    <input type="text"  class="form-control" id="lestname" name='e_lestname' value='{{s.lestName}}' required >
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="fathername"  class="form-control-label">Father Name </label>
+                                                                    <input type="text" class="form-control" id="fathername" name='e_fathername' value='{{s.FatherName}}' required >
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="mothername"  class="form-control-label">Mother Name </label>
+                                                                    <input type="text" class="form-control" id="mothername" name='e_mothername' value='{{s.MotherName}}' required >
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="phone"  class="form-control-label">Phone Number </label>
+                                                                    <input type="text" class="form-control" id="phone" name='e_phone' value='{{s.Phonenumber}}' required >
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="email"  class="form-control-label">Email </label>
+                                                                    <input type="email" class="form-control" id="email" name='e_email' value='{{s.email}}' required >
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="dob"  class="form-control-label">date of birth <b> {{s.dob}} </b> </label>
+                                                                    <input type="date" class="form-control" id="dob"  name='e_dob' value='{{s.dob}}'  >
+                                                                </div>
+                                                                
+                                                            
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary"> Save Update </button>
+                                                        </div>
+                                                    </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="modaldemo{{s.id}}">
+                                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                                                    <div class="modal-content modal-content-demo">
+                                                        <div class="modal-header">
+                                                            <h6 class="modal-title">Warning </h6>
+                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h2> Are you sure ??</h2>
+                                                            <p>You went to delete data from your datebase. </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form action="hendel_s_delete" method="post">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="e_s_idi" value="{{s.id}}">
+                                                                <button class="btn btn-primary" type="submit">DELETE</button> 
+                                                            </form>
+                                                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> {% endcomment %}
+                                        </div>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+					
+{% endblock body %}
+

@@ -1,0 +1,133 @@
+
+{% extends "panel/basepanel.html" %}
+{% block title %} Project Deshborard  {% endblock title %}
+{% load static %}
+{% block headingtitletag %} addNewStudent  {% endblock headingtitletag %}
+{% block body %}
+			
+<div class="col-xl-12">
+    <div class="card m-b-20">
+        <div class="card-header">
+                <h3 class="card-title">Register new Student</h3>
+            {% for message in messages %}
+            <h3 class="alert alert-{{ message.tags }} card-title">{{ message }}</h3>
+            {% endfor %}
+            
+        </div>
+        <div class="card-body mb-0">
+            <form action="hendel_save_student" method="post" enctype="multipart/form-data" class="form-horizontal" >
+                {% csrf_token %}
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="examplenameInputname2" >Fast Name</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="examplenameInputname3" name='fname'  placeholder="Enter FastName" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="inputEmail3">Lest name</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="inputEmail4" name="lname" placeholder="Enter least name" >
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="inputPassword5">Father name</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="inputPassword6" name="fatherName" placeholder="Father name" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="inputPassword7">Mother name </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="inputPassword8" name="motherName" placeholder="Enter mother name " required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="inputPassword7">Phone number </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="inputPassword8" name="phone" placeholder="Phone : +880-1" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="exampleInputnumber4">Email</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control" id="examplenameInputname5" name="email" placeholder="examle@gmail.com" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="exampleInputnumber6">Date of Birth </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="date" class="form-control"  id="exampleInputnumber7" name="dob" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label">Select your course </label>
+                        </div>
+                        <div class="col-md-9">
+                            <select class="form-control " name="courseid">
+                                <option selected value=''> ========== Select ==========</option>
+                                {% for curse in  courses %}
+                                <option value='{{curse.id}}'>{{curse.curseName}}</option>
+                                
+                                {% endfor %}
+                                
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="exampleInputnumber6">Date of Birth </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="file" class="form-control "  id="exampleInputnumber7" name="images" required>
+                        </div>
+                    </div>
+                </div>
+                
+        
+                <div class="form-group mb-0 row justify-content-end">
+                    <div class="col-md-9 float-end">
+                        <button type="submit" class="btn btn-block btn-success waves-effect waves-light">Add Student </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+					
+
+				
+{% endblock body %}
+

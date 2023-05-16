@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+	{% load static %}
+<head>
+		<!-- Meta data -->
+		<meta charset="UTF-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+		<!-- Favicon -->
+		<link rel="icon" href="{% static 'assets/images/brand/favicon.ico'%}" type="image/x-icon"/>
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/brand/favicon.ico'%}" />
+
+		<!-- Title -->
+		<title>{% block title %}{% endblock title %}</title>
+
+		<!-- Bootstrap css -->
+		<link href="{% static 'assets/plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet" />
+
+		<!-- Style css -->
+		<link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+		<!-- Font-awesome  css -->
+		<link href="{% static 'assets/css/icons.css' %}" rel="stylesheet"/>
+
+		<!--Select2 css -->
+		<link href="{% static 'assets/plugins/select2/select2.css' %}" rel="stylesheet" />
+
+		<!-- Cookie css -->
+		<link href="{% static 'assets/plugins/cookie/cookie.css'%} " rel="stylesheet">
+
+		<!-- Owl Theme css-->
+		<link href="{% static 'assets/plugins/owl-carousel/owl.carousel.css' %}" rel="stylesheet" />
+
+		<!--Jquery flexdatalist  css -->
+		<link href="{% static 'assets/plugins/jquery.flexdatalist/jquery.flexdatalist.css'%}" rel="stylesheet">
+
+		<!-- Switcher css -->
+		<link  href="{% static 'assets/switcher/css/switcher.css' %}" rel="stylesheet" id="switcher-css" type="text/css" media="all"/>
+
+		<!-- Color Skin css -->
+		<link id="theme" rel="stylesheet" type="text/css" media="all" href="{% static 'assets/color-skins/color.css' %}" />
+        {% block style %}{% endblock style %}
+	</head>
+
+	<body>
+
+	
+
+		<!--Loader-->
+		<div id="global-loader">
+			<img src="{% static 'assets/images/loader.svg' %}" class="loader-img" alt="img">
+		</div><!--/Loader-->
+
+		<!--Section-->
+		<div  class="banner-1 cover-image bg-background-1" data-bs-image-src="{% static 'assets/images/banners/5.jpg' %} ">
+			<!--Topbar-->
+			<div class="header-main">
+
+				<!-- Mobile Header -->
+				<div class="sticky">
+					<div class="horizontal-header clearfix ">
+						<div class="container">
+							<a id="horizontal-navtoggle" class="animated-arrow"><span></span></a>
+							<span class="smllogo"><img src="{% static 'assets/images/brand/logo1.png' %} " width="120" alt="img"/></span>
+							<span class="smllogo-white"><img src="{% static 'assets/images/brand/logo.png' %} " width="120" alt="img"/></span>
+							<a href="tel:0144444440" class="callusbtn"><i class="icon icon-phone" aria-hidden="true"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- /Mobile Header -->
+
+				<!--Horizontal-main -->
+				<div class="horizontal-main header-style1 bg-dark-transparent clearfix p-0 pt-4">
+					<div class="horizontal-mainwrapper container clearfix">
+						<div class="desktoplogo">
+							<a href="/"><img src="{% static 'assets/images/brand/logo1.png' %} " alt="img">
+								<img src="{% static 'assets/images/brand/logo.png' %} " class="header-brand-img header-white" alt="logo">
+							</a>
+						</div>
+						<div class="desktoplogo-1">
+							<a href="/"><img src="{% static 'assets/images/brand/logo.png' %} " alt="img"></a>
+						</div>
+						<nav class="horizontalMenu clearfix d-md-flex">
+							<ul class="horizontalMenu-list">
+								
+								<li aria-haspopup="true"><a href="/">Home </a></li>
+								<li aria-haspopup="true"><a href="/about">About Us </a></li>
+								<li aria-haspopup="true"><a href="/contact">Contact</a></li>
+								<li aria-haspopup="true"><a href="/categories"> Projects</a></li>
+
+								{% comment %} <li aria-haspopup="true"><a href="/getcirtificate">get cirtificate </a></li> {% endcomment %}
+								<li aria-haspopup="true"><a href="/course">Our Courses</a></li>
+								
+								{% if request.user.is_authenticated %}
+								<li aria-haspopup="true" class="p-0 mt-1">
+									<span><a class="btn btn-secondary" href="/profile"> profile </a></span>
+								</li>
+								{% else %}
+
+								<li aria-haspopup="true"><a href="/login">log In </a></li>
+								<li aria-haspopup="true"><a href="/signup">Sign Up</a></li>
+								{% endif %}
+								
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div><!--/Horizontal-main -->
+
+  {% block body %}{% endblock body %}
+
+
+
+		<!--Footer Section-->
+		<footer class="bg-dark">
+			<div class="footer-main footer-main1">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="row">
+								<div class="col-lg-7 col-md-12">
+									<img src="{% static 'assets/images/brand/logo-white.png' %} " class="w-auto border-0" alt="img">
+									<ul class="list-unstyled mb-0 mt-4">
+										<li>
+											<a href="javascript:void(0)">Second stret, New York, NY 10012, US</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)">info@example.com, info@edomi.com</a></li>
+										<li>
+											<a href="javascript:void(0)">+ 01 234 567 88</a>
+										</li>
+										 <li>
+											<a href="javascript:void(0)">+ 01 234 567 89</a>
+										</li>
+									</ul>
+									<ul class="list-unstyled list-inline mt-5 mb-lg-0 mb-5">
+										<li class="list-inline-item">
+											<a class="social-icons btn-sm rgba-white-slight waves-effect waves-light">
+												<i class="fa fa-facebook"></i>
+											</a>
+										</li>
+										<li class="list-inline-item">
+											<a class="social-icons btn-sm rgba-white-slight waves-effect waves-light">
+												<i class="fa fa-twitter"></i>
+											</a>
+										</li>
+										<li class="list-inline-item">
+											<a class="social-icons btn-sm rgba-white-slight waves-effect waves-light">
+												<i class="fa fa-google-plus"></i>
+											</a>
+										</li>
+										<li class="list-inline-item">
+											<a class="social-icons btn-sm rgba-white-slight waves-effect waves-light">
+												<i class="fa fa-linkedin"></i>
+											</a>
+										</li>
+										<li class="list-inline-item">
+											<a class="social-icons btn-sm rgba-white-slight waves-effect waves-light">
+												<i class="fa fa-github"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="col-lg-5 col-md-12">
+									<h6 class="font-weight-normal text-white">Categories</h6>
+									<ul class="list-unstyled mb-5 mb-lg-0">
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Software Development</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Web Development</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Web Designing</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Business Classes</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Animation Classes</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Networking Classes</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="row">
+								<div class="col-lg-4 col-md-12">
+									<h6 class="font-weight-normal text-white">Courses</h6>
+									<ul class="list-unstyled mb-5 mb-lg-0">
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Angular</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Java</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> HTML</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Devops</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Php Laravel</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Digital Marketing</a></li>
+									</ul>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<h6 class="font-weight-normal text-white">Our Company</h6>
+									<ul class="list-unstyled mb-lg-0 mb-5">
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Our Team</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Contact US</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> About Us</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Services</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Blog News</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Online Classes</a></li>
+									</ul>
+								</div>
+								<div class="col-lg-4 col-md-12">
+									<h6 class="font-weight-normal text-white">Support</h6>
+									<ul class="list-unstyled mb-5 mb-lg-0">
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Home</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Sitemap</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Privacy Policy</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Cooky Policy</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Web User Plocy</a></li>
+										<li><a href="javascript:;"><i class="fe fe-chevron-right"></i> Terms and Services</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="py-3 bg-dark">
+				<div class="container">
+					<div class="row d-flex">
+						<div class="col-lg-12 col-sm-12  mt-2 mb-2 text-center text-white">
+							Copyright © 2022 Roktim Ashraful  All rights reserved.
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!--Footer Section-->
+
+		<!-- Back to top -->
+		<a href="#top" id="back-to-top" ><i class="fa fa-long-arrow-up"></i></a>
+
+		<!-- JQuery js-->
+		<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+
+		<!-- Bootstrap js -->
+		<script src="{% static 'assets/plugins/bootstrap/js/popper.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<!--JQuery IT Coursesrkline js-->
+		<script src="{% static 'assets/js/jquery.sparkline.min.js' %}"></script>
+
+		<!-- Circle Progress js-->
+		<script src="{% static 'assets/js/circle-progress.min.js' %}"></script>
+
+		<!-- Star Rating js-->
+		<script src="{% static 'assets/plugins/jquery-bar-rating/jquery.barrating.js' %}"></script>
+		<script src="{% static 'assets/plugins/jquery-bar-rating/js/rating.js' %}"></script>
+
+		<!--Owl Carousel js -->
+		<script src="{% static 'assets/plugins/owl-carousel/owl.carousel.js' %}"></script>
+
+		<!--Horizontal Menu js-->
+		<script src="{% static 'assets/plugins/horizontal-menu/horizontal-menu.js' %}"></script>
+
+		<!--Counters -->
+		<script src="{% static 'assets/plugins/counters/counterup.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/counters/waypoints.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/counters/numeric-counter.js' %}"></script>
+
+		<!--JQuery TouchSwipe js-->
+		<script src="{% static 'assets/js/jquery.touchSwipe.min.js' %}"></script>
+
+		<!--Select2 js -->
+		<script src="{% static 'assets/plugins/select2/select2.full.min.js' %}"></script>
+		<script src="{% static 'assets/js/select2.js' %}"></script>
+
+		<!-- Cookie js -->
+		<script src="{% static 'assets/plugins/cookie/jquery.ihavecookies.js' %}"></script>
+		<script src="{% static 'assets/plugins/cookie/cookie.js'%}"></script>
+
+		<!-- Internal :::   Jquery flexdatalist js -->
+		<script src="{% static 'assets/plugins/jquery.flexdatalist/jquery.flexdatalist.js' %}"></script>
+		<script src="{% static 'assets/plugins/jquery.flexdatalist/data-list.js' %}"></script>
+
+		<!-- sticky js-->
+		<script src="{% static 'assets/js/sticky.js' %}"></script>
+
+		<!-- Switcher js -->
+		<script src="{% static 'assets/switcher/js/switcher.js' %}"></script>
+
+		<!-- Scripts js-->
+		<script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+
+		<!-- Typewritter js-->
+		<script src="{% static 'assets/js/typewritter.js' %}"></script>
+
+		<!-- Custom js-->
+		<script src="{% static 'assets/js/custom.js' %}"></script>
+
+	</body>
+
+</html>

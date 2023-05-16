@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+	{% block title %} Project  {% endblock title %}
+	{% load static %}
+	{% block body %}
+	<!--Section-->
+    <section>
+        <div class="sptb-2 bannerimg">
+            <div class="header-text mb-0">
+                <div class="container">
+                   
+
+                    <div class="text-center text-white py-7">
+                        <h1 class="">Profile </h1>
+                        <ol class="breadcrumb text-center">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Pages</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">{{username}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/Section-->
+</div>
+</div>
+
+
+		<!-- Shape Start -->
+        <div class="relative">
+            <div class="shape overflow-hidden text-white">
+                <svg viewBox="0 0 2880 48" fill="none" xmsns="http://www.w3.org/2000/svg">
+                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="#f5f4f9"></path>
+                </svg>
+            </div>
+        </div>
+        <!--Shape End-->
+    
+
+<!--Section-->
+<section class="sptb profile-2">
+    <div class="container">
+        {% for message in messages %}
+        <p class="fs-16 mt-5 alert alert-{{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+
+        <div class="row">
+          
+            <div class="col-xl-3 col-lg-3 col-md-12">
+                {% if request.user.is_staff and not request.user.is_superuser  %}
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Dashboard</h3>
+                    </div>
+                   
+                    <aside class="app-sidebar doc-sidebar my-dash">
+                        <div class="app-sidebar__user clearfix">
+                            <ul class="side-menu">
+                                
+                                <li>
+                                    <a class="side-menu__item" href="/{{username}}/mybitedtask"><i class="side-menu__icon fe fe-layers"></i><span class="side-menu__label">My Bited Task </span></a>
+                                </li>
+                               
+                                
+                                <li>
+                                    <a class="side-menu__item" href="/{{username}}/payment"><i class="side-menu__icon fe fe-credit-card"></i><span class="side-menu__label">Payments</span></a>
+                                </li>
+                               
+                                <li>
+                                    <a class="side-menu__item" href="settings.html"><i class="side-menu__icon fe fe-settings"></i><span class="side-menu__label">Settings </span></a>
+                                </li>
+                                <li>
+                                    <a class="side-menu__item" href="/logout"><i class="side-menu__icon fe fe-power"></i><span class="side-menu__label">Logout</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+                {% endif %}
+                <!--  public profie -->
+                <div class="card">
+                    <div class="item-user" >
+                        <div class="profile-pic wideget-user-img mb-0 pt-5"  >
+                            {% if request.method == 'GET' %}
+                            <img src="../studentProfile/{{profile.img}}" class="brround " style="width:128px; height:128px; overflow: hidden; " alt="user">
+                            {% else %}
+                            <img src="studentProfile/{{profile.img}}" class="brround " style="width:128px; height:128px; overflow: hidden; " alt="user">
+
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-body item-user text-center">
+                         <div class="ms-1">
+                            <a href="userprofile.html" class="text-dark">
+                               <h4 class="mt-0 mb-2 font-weight-bold">{{profile.fastname}} {{profile.lestname}} <i class="ion-checkmark-circled text-success"></i></h4>
+                            </a>
+                            <span class="mb-3">UI/UX Designer</span><br>
+                            <div class="rating-stars d-inline-flex mb-2 me-3">
+                               <div class="star-ratings start-ratings-main clearfix me-3">
+                                    <div class="stars stars-example-fontawesome stars-example-fontawesome-sm">
+                                        <select class="example-fontawesome" name="rating" autocomplete="off">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4" selected>4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                               4.0
+                            </div>
+                            <div class="item-user-icons">
+                                <a href="javascript:void(0)" class="facebook-bg mt-0 me-1"><i class="fa fa-facebook"></i></a>
+                                <a href="javascript:void(0)" class="twitter-bg me-1"><i class="fa fa-twitter"></i></a>
+                                <a href="javascript:void(0)" class="google-bg me-1"><i class="fa fa-google"></i></a>
+                                <a href="javascript:void(0)" class="dribbble-bg me-1"><i class="fa fa-dribbble"></i></a>
+                            </div>
+                         </div>
+                    </div>
+                    <div class="card-body item-user">
+                        <h4 class="mb-4">Contact Info</h4>
+                        <div>
+                            <h6 class="mb-3"><span class="font-weight-semibold"><i class="fe fe-map-pin me-2 mb-2"></i></span><a href="javascript:void(0)" class="text-body"> {{profile.location}}</a></h6>
+                            <h6 class="mb-3"><span class="font-weight-semibold"><i class="fe fe-mail me-2 mb-2"></i></span><a href="javascript:void(0)" class="text-body"> {{email}}</a></h6>
+                            <h6 class="mb-3"><span class="font-weight-semibold"><i class="fe fe-phone me-2  mb-2"></i></span><a href="javascript:void(0)" class="text-body"> {{profile.phone}}</a></h6>
+                            <h6 class="mb-0"><span class="font-weight-semibold"><i class="fe fe-link me-2 "></i></span><a href="javascript:void(0)" class="text-body">{{profile.website}}</a></h6>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-start">
+                            <a href="javascript:void(0)" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#contact"><i class="fa fa-user"></i> Contact Me</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div> 
+            <!--Right Side Content-->
+            <div class="col-xl-9 col-lg-9 col-md-12">
+                <!--Coursed Description-->
+                {% block profilerightcontent %}{% endblock profilerightcontent %}
+              
+               
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Section-->
+
+
+<!-- Message Modal -->
+<div class="modal fade" id="contact" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="examplecontactLongTitle">Send Message</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="contact-name" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="contact-email" placeholder="Email Course address">
+                </div>
+                <div class="form-group mb-0">
+                    <textarea class="form-control" name="example-textarea-input" rows="6" placeholder="Message"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success">Send</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /Message Modal -->
+
+<!--Comment Modal -->
+<div class="modal fade" id="Comment" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleCommentLongTitle">Leave a Comment</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="Comment-name" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="Comment-email" placeholder="Email Course address">
+                </div>
+                <div class="form-group mb-0">
+                    <textarea class="form-control" name="example-textarea-input" rows="6" placeholder="Message"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success">Send</button>
+            </div>
+        </div>
+    </div>
+</div><!--/Comment Modal -->
+
+<!-- Report Modal -->
+<div class="modal fade" id="report" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="examplereportLongTitle">Report Abuse</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="report-name" placeholder="Enter url">
+                </div>
+                <div class="form-group">
+                    <select name="country" id="select-countries2" class="form-control form-select">
+                        <option value="1" selected>Categories</option>
+                        <option value="2">Spam</option>
+                        <option value="3">Identity Theft</option>
+                        <option value="4">Online Shopping Fraud</option>
+                        <option value="5">Service Providers</option>
+                        <option value="6">Phishing</option>
+                        <option value="7">Spyware</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="report-email" placeholder="Email Course address">
+                </div>
+                <div class="form-group mb-0">
+                    <textarea class="form-control" name="example-textarea-input" rows="6" placeholder="Message"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /Report Modal -->
+
+
+
+
+    {% endblock body %}

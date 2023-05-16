@@ -1,0 +1,52 @@
+
+{% extends "panel/basepanel.html" %}
+{% block title %} Project Deshborard  {% endblock title %}
+{% load static %}
+{% block headingtitle %} Edit Student  {% endblock headingtitle %}
+{% block headingtitletag %} editStudent  {% endblock headingtitletag %}
+{% block body %}
+{% for message in messages %}
+            <p class="p-4 alert alert-{{ message.tags }} card-title">{{ message }}</p>
+            {% endfor %}
+
+<form action="/hendel_student_update" method="post">
+    <input type='hidden' name="e_s_id" value='{{students.id}}' /> 
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="fastname"  class="form-control-label">First Name </label>
+        <input type="text" class="form-control" id="fastname" name='e_fastname' value='{{students.FastName}}' required >
+    </div>
+    <div class="form-group">
+        <label for="lestname"  class="form-control-label">Least Name </label>
+        <input type="text"  class="form-control" id="lestname" name='e_lestname' value='{{students.lestName}}' required >
+    </div>
+    <div class="form-group">
+        <label for="fathername"  class="form-control-label">Father Name </label>
+        <input type="text" class="form-control" id="fathername" name='e_fathername' value='{{students.FatherName}}' required >
+    </div>
+    <div class="form-group">
+        <label for="mothername"  class="form-control-label">Mother Name </label>
+        <input type="text" class="form-control" id="mothername" name='e_mothername' value='{{students.MotherName}}' required >
+    </div>
+    <div class="form-group">
+        <label for="phone"  class="form-control-label">Phone Number </label>
+        <input type="text" class="form-control" id="phone" name='e_phone' value='{{students.Phonenumber}}' required >
+    </div>
+    <div class="form-group">
+        <label for="email"  class="form-control-label">Email </label>
+        <input type="email" class="form-control" id="email" name='e_email' value='{{students.email}}' required >
+    </div>
+    <div class="form-group">
+        <label for="dob"  class="form-control-label">date of birth <b> {{students.dob}} </b> </label>
+        <input type="date" class="form-control" id="dob"  name='e_dob' value='{{students.dob}}'  >
+    </div>
+    
+
+</div>
+<div class="modal-footer">
+<button type="submit" class="btn btn-primary"> Save Update </button>
+</div>
+</form>
+				
+{% endblock body %}
+

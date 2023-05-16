@@ -1,0 +1,83 @@
+
+{% extends "panel/basepanel.html" %}
+{% block title %} Project Deshborard  {% endblock title %}
+{% load static %}
+{% block headingtitle %} Add new course  {% endblock headingtitle %}
+{% block headingtitletag %} addnewcourse  {% endblock headingtitletag %}
+{% block body %}
+			
+<div class="col-xl-12">
+    <div class="card m-b-20">
+        <div class="card-header">
+            {% for message in messages %}
+            <h3 class="text-{{ message.tags }} card-title">{{ message }}</h3>
+            {% endfor %}
+        </div>
+        <div class="card-body mb-0">
+            <form class="form-horizontal" action='addnewcourse' method='post' >
+            {% csrf_token %}
+             
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="exampleInputnumber4">Course Name </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name='coursename' id="examplenameInputname5"  placeholder="Enter course Name" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="exampleInputnumber41">Description </label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea name="coursedescription" class="form-control"  cols="30" rows="10"></textarea>
+                           </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="exampleInputnumber41">Regular Fess </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name='regularFees' id="examplenameInputname51"  placeholder="regular Fees" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="exampleInputnumber6">course creadit</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="Number" class="form-control" name='coursecreadit' id="exampleInputnumber7" min='1' placeholder="creadit" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label" id="exampleInputnumber8"> Amout of Course </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="Number" class="form-control" name='courseFees'  id="exampleInputnumber9" min='1' placeholder="course fees" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-0 row justify-content-end">
+                    <div class="col-md-9 float-end">
+                        <button type="submit" class="btn btn-block btn-success waves-effect waves-light">Add Course </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+					
+
+				
+{% endblock body %}
+

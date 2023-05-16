@@ -1,0 +1,78 @@
+
+{% extends "panel/basepanel.html" %}
+{% block title %} Project Course Detiles  {% endblock title %}
+{% load static %}
+{% block body %}	
+
+{% for message in messages %}
+            <p class="p-4 alert alert-{{ message.tags }} card-title">{{ message }}</p>
+            {% endfor %}
+                        <div class="row">
+							<div class="col-md-12">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Payment Overview</h3>
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table class="data-table-example table table-striped table-bordered table-vcenter text-nowrap">
+												<thead>
+													<tr>
+														
+														<th >Id </th>
+														<th >user  </th>
+														<th >amount  </th>
+														<th >status  </th>
+														<th > action  </th>
+														
+													
+														
+														
+													</tr>
+												</thead>
+												<tbody>
+													{% for reqs in allrequest %}
+													<tr>
+														<td> #INV- {{reqs.requid}} </td>
+														
+														<td> {% for i in reqs.uid.profile_set.all   %}
+															{{i.fastname}}  {{i.lestname}}
+															{% endfor %} 
+														 </td>
+														 <td> ৳ {{reqs.amount}} </td>
+														<td> <a href="javascript:void(0)" class="btn 
+															{% if reqs.status == 'requested' %}
+																 btn-warning
+															{% elif reqs.status == 'accepted' %}
+																   btn-success
+							   
+															   {% else %}
+															   btn-danger
+															{% endif %}
+														  
+														   
+														   btn-sm">
+														   
+														   {{reqs.status}}</a>
+														</td>
+														<td class="text-center">
+															<a class="btn btn-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="View"><i class="fe fe-eye fs-16"></i></a>
+														</td>
+													</tr>
+													{% endfor %}
+												
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+						
+					</div>
+					
+{% endblock body %}
+
